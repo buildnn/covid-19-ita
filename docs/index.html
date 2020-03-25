@@ -9,14 +9,24 @@
     <meta property="og:image" content="assets/img/Corona_CDC-AlissaEckert_Head_1024x400.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="assets/css/Article-Dual-Column.css">
+    <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="assets/css/Brands.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
     <link rel="stylesheet" href="assets/css/style.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.0.2"></script>
@@ -24,242 +34,203 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="#"><img class="px-4 mb-2" src="assets/img/COVID-19-ITA.svg" height="30"><strong>COVID-19</strong>&nbsp;ITA</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-light navbar-expand-md sticky-top bg-white clean-navbar">
+        <div class="container-fluid"><a class="navbar-brand logo" href="index.html"><img class="px-4 mb-2" src="assets/img/COVID-19-ITA.svg" height="30"><strong>COVID-19</strong>&nbsp;ITA</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about-us.html">About Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link active" data-toggle="dropdown" aria-expanded="false">BLOG&nbsp;</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="diffusione-coronavirus-italia.html">DIFFUSIONE IN ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">DIFFUSIONE GLOBALE</a>
+                            <a
+                                class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMA SANITARIO ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMI SANITARI INTERNAZIONALI</a></div>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html#chi-siamo">Chi SIAMO</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="progetto.html">PARTECIPA AL PROGETTO</a></li>
                 </ul>
         </div>
         </div>
     </nav>
-    <main id="hero" class="mt-5">
-        <section class="clean-block clean-hero pt-5" style="background-image: url(&quot;assets/img/Corona_CDC-AlissaEckert_Head_1024x400.jpg&quot;);color: rgba(0,0,0,0.65);background-color: #000000;">
-            <div class="text">
-                <h2 data-aos="fade-down" data-aos-duration="2000" data-aos-offset="20" data-aos-delay="250">Le <strong>informazioni</strong> determinano il nostro comportamento.</h2>
-                <p data-aos="fade" data-aos-duration="2000" data-aos-offset="0" data-aos-delay="1500" data-aos-once="true">Abbiamo riunito un gruppo di economisti e data scientist per rispondere ad alcune domande sul modo in cui stiamo affrontando il Nuovo Coronavirus&nbsp;</p>
-                <div data-aos="fade" data-aos-duration="1000" data-aos-delay="3000"><a class="btn btn-outline-light btn-lg mx-1" role="button" href="#info" target="_top">Esplora</a><button class="btn btn-outline-light btn-lg mx-1" type="button" style="border-width: 0;">Chi siamo</button></div>
+    <main id="hero">
+        <section class="clean-block clean-hero" style="background-image: url(&quot;assets/img/Corona_CDC-AlissaEckert_Head_1024x400.jpg&quot;);color: rgba(0,0,0,0.65);background-color: #000000;">
+            <div class="text"><h2>Le <strong>informazioni</strong> sono utili solo quando possono essere comprese <span style="font-size: 14pt !important;"><em>(M. Cooper)</em></span><br /></h2>
+                <p data-aos="fade" data-aos-duration="2000" data-aos-offset="0" data-aos-delay="800" data-aos-once="true">Analizzare le scelte passate del SSN e l'evoluzione del Covid-19 per disegnare un futuro migliore</p>
+                <div data-aos="fade" data-aos-duration="1000" data-aos-delay="2000"><a class="btn btn-outline-light btn-lg mx-1" role="button" href="#intro" target="_top">Esplora</a><a class="btn btn-outline-light btn-lg mx-1" role="button" href="progetto.html" style="border-width: 0;">Chi siamo</a></div>
             </div>
         </section>
     </main>
-    <div class="d-flex flex-row justify-content-center flex-wrap py-5" style="filter: grayscale(100%);opacity: 0.81;"><a class="p-4"> <img src="assets/img/buildnn.svg" height="60"></a><a class="p-4"> <img src="assets/img/tortuga.png" height="40" alt="tortuga-logo"></a></div>
-    <div class="article-clean clean-block dark">
+    <div class="d-flex flex-row justify-content-center flex-wrap py-5" style="filter: grayscale(100%);opacity: 0.81;"><a class="p-4" href="https://www.buildnn.com"> <img src="https://docs.google.com/drawings/d/e/2PACX-1vRFLexkndeaQcKb3shWx78otMKRcdBBp_X74_D_JQipaukfAB7RNIPheYOC8inmhaxd4MQTlvarWbpV/pub?w=465&amp;h=153" height="60"></a><a class="p-4"> <img src="assets/img/tortuga_new.jpg" height="60" alt="tortuga-logo"></a></div>
+    <div
+        class="article-clean clean-block dark">
         <div class="container">
-            <div class="row pt-5">
+            <div class="row pt-5 mb-0" id="intro">
                 <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <div class="intro">
-                        <h1 class="text-center">Your Wonderful Article Title</h1>
-                        <p class="text-center"><span class="by">by</span> <a href="#">Author Name</a><span class="date">Sept 8th, 2016 </span></p>
-                        <div id="vis" style="width: 100%;"></div><img class="img-fluid" src="assets/img/desk.jpg"></div>
+                        <h1 class="text-center">Obiettivo: un'opinione trasparente sul futuro&nbsp;</h1>
+                        <p class="text-center"><span class="by">by</span> <a href="#">BuildNN &amp; TORTUGA</a><span class="date">25 Mar 2020</span></p>
+                        <div id="vis" style="width: 100%;"></div>
+                    </div>
                     <div class="text">
-                        <p>Sed lobortis mi. Suspendisse vel placerat ligula. <span style="text-decoration: underline;">Vivamus</span> ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in
-                            justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus. <strong>Ut vehicula rhoncus</strong> elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit <em>pulvinar dict</em> vel in justo. Vestibulum
-                            ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                        <h2>Aliquam In Arcu </h2>
-                        <p>Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                            posuere cubilia Curae.</p>
-                        <figure>
-                            <figcaption>Caption</figcaption>
-                        </figure>
-                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
-                            pulvinar dictum vel in justo.</p>
+                        <p>Il blog&nbsp;<strong>COVID-19 Ita</strong>&nbsp;nasce con l’obiettivo di integrare, semplificare e rendere più accessibili le informazioni e le analisi più rilevanti sui temi che gravitano intorno alla diffusione del Covid-19,
+                            all’evoluzione del Sistema Sanitario Nazionale (SSN) e il confronto con i sistemi sanitari a livello internazionale<br></p>
+                        <p>Il portale è organizzato in 4 sezioni tematiche.&nbsp;Tutti i contenuti sviluppati dal team di lavoro e dai collaboratori verranno integrati nelle sezioni di pertinenza e saranno disponibili nella sezione Blog<br></p>
+                        <p>I dataset, gli strumenti di data processing ed il portale stesso sono un progetto Open Source. Crediamo nelle potenzialità della collaborazione: se hai informazioni, vuoi dare un contributo o anche solo suggerici qualcosa,&nbsp;partecipa
+                            anche tu al&nbsp;<a href="progetto.html">progetto [link]</a>&nbsp;</p>
+                        <figure></figure>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <main id="content" class="page landing-page">
-        <section>
-            <div></div>
-        </section>
-        <section class="clean-block clean-info dark">
+        </div>
+        <div class="clearfix"></div>
+        <div class="projects-horizontal pb-5 mb-5">
             <div class="container">
-                <div class="block-heading pb-5">
-                    <h2 class="text-info" id="info">Facciamo chiarezza su alcune domande</h2>
-                    <p>Abbiamo rielaborato i dati provenienti da Protezione Civile, Ministero della Salute, Istat, Eurostat e altre fonti per raccontare in maniera più chiara le scelte passate e gli scenari attuali&nbsp;</p><a class="btn btn-outline-dark btn-lg mx-1"
-                        role="button" href="#info" target="_top">Esplora</a></div>
-                <h1>Diffusione del Contagio</h1>
-                <div class="row align-items-center my-5">
-                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
-                    <div class="col-md-6">
-                        <h3>Quanto si diffonde Coronavirus nella mia Provincia?</h3>
-                        <div class="getting-started-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button></div>
+                <div class="intro">
+                    <h2 class="text-center pt-5 mt-5"><strong>Quattro temi da conoscere per comprendere il fenomeno Coronavirus</strong></h2>
+                    <p class="text-center">Le sezioni verranno rilasciate e arricchite giornalmente con nuovi contenuti, analisi e indicazioni di policy-making a cura del team di lavoro e collaboratori </p>
                 </div>
-                <div class="row flex-row-reverse align-items-center my-5">
-                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
-                    <div class="col-md-6">
-                        <h3>Quanti tamponi sono stati fatti? Quali sono le implicazioni?</h3>
-                        <div class="getting-started-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button></div>
-                </div>
-                <div class="row flex-row align-items-center my-5">
-                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
-                    <div class="col-md-6">
-                        <h3>Quanti tamponi sono stati fatti? Cosa implica questo?</h3>
-                        <div class="getting-started-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button></div>
-                </div>
-                <h1>Sistema Sanitario Italiano e Ospedali</h1>
-                <div class="row flex-row-reverse align-items-center my-5">
-                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
-                    <div class="col-md-6">
-                        <h3>A quali strutture sanitarie fa riferimento il mio comune?</h3>
-                        <div class="getting-started-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button></div>
-                </div>
-                <div class="row flex-row align-items-center my-5">
-                    <div class="col-md-6"><img class="img-thumbnail" src="assets/img/scenery/image5.jpg"></div>
-                    <div class="col-md-6">
-                        <h3>Come si sono evoluti negli anni i posti letto negli ospedali italiani?</h3>
-                        <div class="getting-started-info">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                        </div><button class="btn btn-outline-primary btn-lg" type="button">Join Now</button></div>
-                </div>
-            </div>
-        </section>
-        <section class="clean-block features">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Features</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-md-5 feature-box"><i class="icon-star icon"></i>
-                        <h4>Bootstrap 4</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                    </div>
-                    <div class="col-md-5 feature-box"><i class="icon-pencil icon"></i>
-                        <h4>Customizable</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                    </div>
-                    <div class="col-md-5 feature-box"><i class="icon-screen-smartphone icon"></i>
-                        <h4>Responsive</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                    </div>
-                    <div class="col-md-5 feature-box"><i class="icon-refresh icon"></i>
-                        <h4>All Browser Compatibility</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="clean-block slider dark">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">Slider</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                </div>
-                <div class="carousel slide" data-ride="carousel" id="carousel-1">
-                    <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active"><img class="w-100 d-block" src="assets/img/scenery/image1.jpg" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="assets/img/scenery/image4.jpg" alt="Slide Image"></div>
-                        <div class="carousel-item"><img class="w-100 d-block" src="assets/img/scenery/image6.jpg" alt="Slide Image"></div>
-                    </div>
-                    <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev"><span class="carousel-control-prev-icon"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carousel-1" role="button"
-                            data-slide="next"><span class="carousel-control-next-icon"></span><span class="sr-only">Next</span></a></div>
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-1" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-1" data-slide-to="1"></li>
-                        <li data-target="#carousel-1" data-slide-to="2"></li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-        <section class="clean-block about-us">
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info">About Us</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/avatars/avatar1.jpg">
-                            <div class="card-body info">
-                                <h4 class="card-title">John Smith</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                <div class="row projects">
+                    <div class="col-sm-6 item">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-5">
+                                <a href="#">
+                                    <div style="width: 200px;height: 160px;background-image: url(&quot;assets/img/contagio_ita.png&quot;);background-size: 240px;background-position: left;"></div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <h3 class="name"><strong>Diffusione del Virus in Italia</strong></h3>
+                                <p class="description">Monitoraggio giornaliero sulla diffusione di Covid-19 in Italia, nelle Regioni e nelle Province italiane </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/avatars/avatar2.jpg">
-                            <div class="card-body info">
-                                <h4 class="card-title">Robert Downturn</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                    <div class="col-sm-6 item">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-5">
+                                <a data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">
+                                    <div style="height: 160px;width: 200px;background-image: url(&quot;assets/img/contagio_international.jpg&quot;);background-size: 200px;background-position: center;filter: blur(1px) grayscale(100%);opacity: 0.50;"></div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <h3 class="name"><strong>Diffusione Globale del Virus</strong></h3>
+                                <p class="description">Monitoraggio della diffusione del Nuovo Coronavirus a livello internazionale e confronto tra le politiche intraprese dai Paesi</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/avatars/avatar3.jpg">
-                            <div class="card-body info">
-                                <h4 class="card-title">Ally Sanders</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                                <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a><a href="#"><i class="icon-social-instagram"></i></a><a href="#"><i class="icon-social-twitter"></i></a></div>
+                    <div class="col-sm-6 item">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-5">
+                                <a data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">
+                                    <div style="width: 200px;height: 160px;background-image: url(&quot;assets/img/ssn_ita.jpg&quot;);background-size: 220px;background-position: 30% 30%;filter: blur(1px) grayscale(100%);opacity: 0.51;"></div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <h3 class="name"><strong>Il Sistema Sanitario Nazionale (SSN) negli Anni&nbsp;</strong></h3>
+                                <p class="description">Una panoramica su fenomeni, scelte e situazioni che hanno determinato l'impatto della Sanità italiana con l'emergenza attuale</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 item">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-5">
+                                <a data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">
+                                    <div style="width: 200px;height: 160px;background-image: url(&quot;assets/img/ss_internazionale.jpg&quot;);background-size: 240px;background-position: right;filter: blur(1px) grayscale(100%);opacity: 0.52;"></div>
+                                </a>
+                            </div>
+                            <div class="col">
+                                <h3 class="name"><strong>Sistemi Sanitari internazionali a confronto</strong></h3>
+                                <p class="description">Sistemi sanitari, approcci epidemiologici e politiche pubbliche differenti: quali le conseguenze nei vari Paesi del mondo?</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-    <footer class="page-footer dark">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Sign up</a></li>
-                        <li><a href="#">Downloads</a></li>
-                    </ul>
+        </div>
+        <main id="content" class="page landing-page">
+            <section>
+                <div></div>
+            </section>
+            <section class="clean-block about-us dark">
+                <div class="container" id="chi-siamo">
+                    <div class="block-heading intro">
+                        <h2 class="text-info dark-section-title">Chi Siamo</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6 col-lg-4">
+                            <div class="card clean-card text-center py-5" style="height: 520px;">
+                                <div class="px-5" style="height: 90px;"><a href="https://www.buildnn.com" target="_blank"><img src="https://docs.google.com/drawings/d/e/2PACX-1vRFLexkndeaQcKb3shWx78otMKRcdBBp_X74_D_JQipaukfAB7RNIPheYOC8inmhaxd4MQTlvarWbpV/pub?w=465&amp;h=153" style="max-height: 90px;" width="100%"></a></div>
+                                <div
+                                    class="card-body info">
+                                    <h4 class="card-title">BuildNN</h4>
+                                    <p class="text-justify card-text">Buildnn è una start-up, nata nel 2020, che offre strumenti e soluzioni a supporto del data-driven decision making per il mondo retail e della distribuzione. I servizi BuildNN si basano su innovative tecniche di machine
+                                        learning e hanno come obiettivo la diffusione di una cultura aziendale data-driven e la traduzione della complessità con strumenti accessibili al management.</p>
+                            </div>
+                            <div class="icons"><a href="#"><i class="icon-social-linkedin"></i></a><a href="#"><i class="icon-social-github"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card clean-card text-center py-5" style="height: 520px;">
+                            <div class="px-5" style="height: 90px;"><a><img src="assets/img/tortuga_new.jpg" style="max-height: 85px;"></a></div>
+                            <div class="card-body info">
+                                <h4 class="card-title">Tortuga</h4>
+                                <p class="text-justify card-text">Tortuga è un think-tank di studenti, ricercatori e giovani professionisti del mondo dell'economia e delle scienze sociali, nato nel 2015. Attualmente conta 51 membri, sparsi tra Europa e il resto del mondo. Scrive articoli
+                                    su temi economici e politici, e offre a istituzioni, esperti e aziende un supporto professionale alle attività di ricerca e policy-making.<br></p>
+                            </div>
+                            <div class="icons"><a href="#"><i class="icon-social-facebook"></i></a></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-3">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Contact us</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
                 </div>
-                <div class="col-sm-3">
-                    <h5>Support</h5>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Help desk</a></li>
-                        <li><a href="#">Forums</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <h5>Legal</h5>
-                    <ul>
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
+            </section>
+        </main>
+        <footer class="page-footer dark">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h5>Get started</h5>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Sign up</a></li>
+                            <li><a href="#">Downloads</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>About us</h5>
+                        <ul>
+                            <li><a href="#">Company Information</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">Reviews</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Support</h5>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Help desk</a></li>
+                            <li><a href="#">Forums</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <h5>Legal</h5>
+                        <ul>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-copyright">
-            <p>© 2020 BuildNN</p>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="assets/js/smoothproducts.min.js"></script>
-    <script src="assets/js/theme.js"></script>
+            <div class="footer-copyright">
+                <p style="font-size: 12px;">© 2020 BuildNN. BuildNN name logo and symbols are proprietary trademarks of Giacomo Barone and Vincenzo Marino / BuildNN.&nbsp;</p>
+            </div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/bs-init.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+        <script src="assets/js/smoothproducts.min.js"></script>
+        <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

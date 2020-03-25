@@ -9,14 +9,24 @@
     <meta property="og:image" content="assets/img/Corona_CDC-AlissaEckert_Head_1024x400.jpg">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
+    <link rel="icon" type="image/svg+xml" sizes="150x150" href="assets/img/COVID-19-ITA.svg">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
     <link rel="stylesheet" href="assets/css/Article-Clean.css">
+    <link rel="stylesheet" href="assets/css/Article-Dual-Column.css">
+    <link rel="stylesheet" href="assets/css/Article-List.css">
     <link rel="stylesheet" href="assets/css/Brands.css">
+    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="assets/css/Navigation-with-Button.css">
+    <link rel="stylesheet" href="assets/css/Projects-Horizontal.css">
     <link rel="stylesheet" href="assets/css/style.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.0.2"></script>
@@ -24,14 +34,19 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="#"><img class="px-4 mb-2" src="assets/img/COVID-19-ITA.svg" height="30"><strong>COVID-19</strong>&nbsp;ITA</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+    <nav class="navbar navbar-light navbar-expand-md sticky-top bg-white clean-navbar">
+        <div class="container-fluid"><a class="navbar-brand logo" href="index.html"><img class="px-4 mb-2" src="assets/img/COVID-19-ITA.svg" height="30"><strong>COVID-19</strong>&nbsp;ITA</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div
                 class="collapse navbar-collapse" id="navcol-1">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="about-us.html">About Us</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
+                    <li class="nav-item dropdown"><a class="dropdown-toggle nav-link active" data-toggle="dropdown" aria-expanded="false">BLOG&nbsp;</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="diffusione-coronavirus-italia.html">DIFFUSIONE IN ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">DIFFUSIONE GLOBALE</a>
+                            <a
+                                class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMA SANITARIO ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMI SANITARI INTERNAZIONALI</a></div>
+                    </li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html#chi-siamo">Chi SIAMO</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="progetto.html">PARTECIPA AL PROGETTO</a></li>
                 </ul>
         </div>
         </div>
@@ -120,7 +135,7 @@
             </div>
         </div>
         <div class="footer-copyright">
-            <p>© 2020 BuildNN</p>
+            <p style="font-size: 12px;">© 2020 BuildNN. BuildNN name logo and symbols are proprietary trademarks of Giacomo Barone and Vincenzo Marino / BuildNN.&nbsp;</p>
         </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
   width: 100%;
+  scroll-behavior: smooth;
 }
 
 .sp-loading {
@@ -182,5 +183,9 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 .error {
   color: red;
+}
+
+.dark-section-title {
+  color: #000000!important;
 }
 
