@@ -217,7 +217,7 @@ def make_fig_010001(
         direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=0.4,
+        x=0.3,
         y=button_layer_1_height,
         # xanchor="left",
         # active=0,
