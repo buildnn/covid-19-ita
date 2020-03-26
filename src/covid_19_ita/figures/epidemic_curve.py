@@ -276,22 +276,31 @@ def make_fig_010001(
 
     # Range selector
     fig.update_layout(
-        images=[dict(
-            source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
-            xref="paper", yref="paper",
-            x=1, y=1.05,
-            sizex=0.1, sizey=0.1,
-            xanchor="right", yanchor="bottom"
-        )],
+        images=[
+            dict(
+                source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
+                xref="paper",
+                yref="paper",
+                x=1,
+                y=1.05,
+                sizex=0.1,
+                sizey=0.1,
+                xanchor="right",
+                yanchor="bottom",
+            )
+        ],
         annotations=[
             dict(
                 text='by <a href="https://www.buildnn.com">BuildNN</a>',
                 # size=8,
                 showarrow=False,
-                xref="paper", yref="paper",
-                x=1, y=1.01,
+                xref="paper",
+                yref="paper",
+                x=1,
+                y=1.01,
                 # sizex=0.1, sizey=0.1,
-                xanchor="right", yanchor="bottom"
+                xanchor="right",
+                yanchor="bottom",
             ),
         ],
         xaxis=dict(
@@ -316,11 +325,12 @@ def make_fig_010001(
             #         dict(step="all")
             #     ])
             # ),
+            fixedrange=True,
             rangeslider=dict(visible=True),
             type="date" if X != "epidemic_age" else "linear",
             showspikes=True,
         ),
-        yaxis=dict(showspikes=True),
+        yaxis=dict(showspikes=True, fixedrange=True,),
     )
 
     return fig
@@ -340,7 +350,9 @@ if __name__ == "__main__":
     fig.write_html(
         os.path.join(EXPORT_DIR, "fig_010001.html"),
         config={
-            # 'scrollZoom': "cartesian",
+            "scrollZoom": True,
+            "doubleClick": False,
+            "showAxisDragHandles": False,
             # "displayModeBar": True,
             "doubleClick": "reset+autosize",
             "displaylogo": False,
