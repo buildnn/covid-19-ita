@@ -53,6 +53,7 @@ if __name__ == "__main__":
 
     fig = fig.update_layout(
         xaxis_title="",
+        yaxis_title=r"% di Posti Letto Occupati (Terapia Intensiva)",
         yaxis_tickformat = '%')
     fig.layout.coloraxis.showscale = False
 
