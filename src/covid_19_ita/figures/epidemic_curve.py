@@ -269,7 +269,7 @@ def make_fig_010001(
         margin=dict(t=100, b=120, l=0, r=0),
         xaxis_showgrid=True,
         yaxis_showgrid=False,
-        height=940,
+        height=700,
         updatemenus=[but_yaxis_scale, but_region],
         showlegend=False,
     )
