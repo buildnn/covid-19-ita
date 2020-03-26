@@ -285,7 +285,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         #         showarrow=False,
         #     ),
         # ],
-        # showlegend=False,
+        showlegend=False,
     )
 
     # Range selector
