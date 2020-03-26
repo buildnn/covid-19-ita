@@ -271,17 +271,6 @@ def make_fig_010001(
         yaxis_showgrid=False,
         height=940,
         updatemenus=[but_yaxis_scale, but_region],
-        # annotations=[
-        #     dict(
-        #         text="Scala asse Y:",
-        #         x=0,
-        #         xref="paper",
-        #         y=1.06,
-        #         yref="paper",
-        #         align="left",
-        #         showarrow=False,
-        #     ),
-        # ],
         showlegend=False,
     )
 
@@ -294,6 +283,17 @@ def make_fig_010001(
             sizex=0.1, sizey=0.1,
             xanchor="right", yanchor="bottom"
         )],
+        annotations=[
+            dict(
+                text='by <a href="https://www.buildnn.com">BuildNN</a>',
+                # size=8,
+                showarrow=False,
+                xref="paper", yref="paper",
+                x=1, y=1.01,
+                # sizex=0.1, sizey=0.1,
+                xanchor="right", yanchor="bottom"
+            ),
+        ],
         xaxis=dict(
             # rangeselector=dict(
             #     buttons=list([
