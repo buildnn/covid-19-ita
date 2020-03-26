@@ -45,7 +45,7 @@ if __name__ == "__main__":
         animation_frame="Data",
         animation_group=map_names("region"),
         color_continuous_scale=px.colors.cyclical.IceFire[2:-2],
-        range_y=[0, 1.4],
+        range_y=[0, snap.saturazione_TI.max()],
         color_continuous_midpoint=.5,
         template="plotly_dark",
         range_color=[0, 1.3],
