@@ -287,6 +287,13 @@ def make_fig_010001(
 
     # Range selector
     fig.update_layout(
+        images=[dict(
+            source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
+            xref="paper", yref="paper",
+            x=1, y=1.05,
+            sizex=0.1, sizey=0.1,
+            xanchor="right", yanchor="bottom"
+        )],
         xaxis=dict(
             # rangeselector=dict(
             #     buttons=list([
