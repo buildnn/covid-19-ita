@@ -122,8 +122,8 @@ def make_fig_010001(
     button_layer_2_height = 1.065
 
     but_yaxis_scale = dict(
-        type="buttons",
-        direction="right",
+        type="dropdown",
+        direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
         x=0.25,
@@ -269,7 +269,7 @@ def make_fig_010001(
         margin=dict(t=100, b=120, l=0, r=0),
         xaxis_showgrid=True,
         yaxis_showgrid=False,
-        height=700,
+        height=680,
         updatemenus=[but_yaxis_scale, but_region],
         showlegend=False,
     )
