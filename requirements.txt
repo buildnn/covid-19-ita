@@ -1,0 +1,13 @@
+click
+requests
+
+pandas
+lxml
+xlrd
+xlwt
+numpy
+
+matplotlib
+seaborn
+altair
+plotly
