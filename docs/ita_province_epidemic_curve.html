@@ -52,9 +52,9 @@
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item dropdown"><a class="dropdown-toggle nav-link active" data-toggle="dropdown" aria-expanded="false">VISUALIZZAZIONE&nbsp;DATI&nbsp;</a>
-                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="diffusione-coronavirus-italia.html">DIFFUSIONE IN ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">DIFFUSIONE GLOBALE</a>
+                        <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="diffusione-coronavirus-italia.html">Diffusione in Italia</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">Diffusione Globale</a>
                             <a
-                                class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMA SANITARIO ITALIA</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">SISTEMI SANITARI INTERNAZIONALI</a></div>
+                                class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">Sistema Sanitario Nazionale</a><a class="dropdown-item disabled" role="presentation" data-toggle="tooltip" data-bs-tooltip="" title="Disponibile dal 30 Marzo">Sistemi Sanitari nel Mondo</a></div>
                     </li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="index.html#chi-siamo">Chi SIAMO</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link active" href="project-it.html">PARTECIPA</a></li>
@@ -79,7 +79,7 @@
     </div>
     <div class="row">
         <div class="col d-xl-flex justify-content-xl-center align-items-xl-center py-2" style="min-height: 600px;">
-            <div class="embed-responsive embed-responsive-1by1 align-self-center my-1" style="max-width: 1200px;height: 960px;background-color: #ffffff;"><iframe class="embed-responsive-item" src="figures/fig_010001.html" allowfullscreen=""></iframe></div>
+            <div class="embed-responsive embed-responsive-1by1 align-self-center my-1" style="max-width: 1200px;height: 960px;background-color: #ffffff;"><iframe class="embed-responsive-item" src="https://buildnn.github.io/covid-19-ita/figures/fig_010001.html" allowfullscreen=""></iframe></div>
         </div>
     </div>
     <div class="article-clean mb-5">
@@ -88,16 +88,23 @@
                 <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
                     <div class="intro"></div>
                     <div class="text">
-                        <p>Sed lobortis mi. Suspendisse vel placerat ligula. <span style="text-decoration: underline;">Vivamus</span> ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in
-                            justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p><img class="img-fluid" src="assets/img/desk.jpg">
-                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac lacus. <strong>Ut vehicula rhoncus</strong> elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit <em>pulvinar dict</em> vel in justo. Vestibulum
-                            ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae.</p>
-                        <h2>Aliquam In Arcu </h2>
-                        <p>Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices
-                            posuere cubilia Curae.</p>
-                        <figure></figure>
-                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae. Suspendisse vel placerat ligula. Vivamus ac sem lac. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit
-                            pulvinar dictum vel in justo.</p>
+                        <h2>Come leggere il Grafico</h2>
+                        <p>Il grafico mostra l’evoluzione dei contagi in Italia con dettaglio per provincia a partire dal giorno in cui sono stati registrati almeno 100 casi di contagi da Covid-19. L’asse delle ascisse mostra il numero di giorni trascorsi
+                            dal superamento del 100° caso. L’asse delle ordinate può essere impostato nella modalità: scala lineare o scala logaritmica.<br></p>
+                        <ul>
+                            <li><strong>Scala lineare</strong>: indica il numero assoluto di casi registrati<br></li>
+                            <li><strong>Scala logaritmica</strong>: indica il logaritmo base 10 del numero di casi registrati (utilizzata per rappresentare i numeri reali positivi che crescono o diminuiscono in maniera esponenziale)</li>
+                            <li><strong>Scala logaritmica</strong>: indica il logaritmo base 10 del numero di casi registrati (utilizzata per rappresentare i numeri reali positivi che crescono o diminuiscono in maniera esponenziale)</li>
+                        </ul>
+                        <p>Nel grafico sono presenti tre linee guida continue più sottili che indicano le traiettorie di raddoppio, in particolare, da sinistra verso destra:<br></p>
+                        <ul>
+                            <li>la curva (retta nella scala logaritmica) per cui il numero di casi <strong>raddoppia ogni 2 giorni</strong><br></li>
+                            <li>la curva (retta nella scala logaritmica) per cui il numero di casi <strong>raddoppia ogni 3 giorni</strong><br></li>
+                            <li>la curva (retta nella scala logaritmica) per cui il numero di casi <strong>raddoppia ogni 7 giorni</strong><br></li>
+                        </ul>
+                        <div style="height: 0px;"><img class="img-fluid invisible" src="assets/img/fig_01001.png"></div>
+                        <p>Sotto il grafico è possible filtrare il periodo che si vuole visualizzare tramite la barra interattiva. A destra è possibile filtrare la visualizzazione per Regione. Cliccare su “Tutte le Regioni” per tornare alla visualizzazione
+                            d’insieme.<br></p>
                     </div>
                 </div>
             </div>
