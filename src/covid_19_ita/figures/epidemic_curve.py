@@ -25,13 +25,7 @@ EXPORT_DIR = os.path.join(HTML_DIR, "figures")
 
 
 def build_simulation_trace(
-    simulation,
-    x_values,
-    name,
-    color,
-    real_data,
-    Y,
-    **kwargs
+    simulation, x_values, name, color, real_data, Y, **kwargs
 ):
     mask = simulation < real_data[Y].max()
     trace = go.Scatter(
@@ -41,7 +35,7 @@ def build_simulation_trace(
             line=dict(color=color, width=0.5, dash="dot"),
             # line=dict(color=color, width=0.5),
             name=name,
-            mode='lines+markers',
+            mode="lines+markers",
             # mode="lines",
             **kwargs,
         )
@@ -49,7 +43,15 @@ def build_simulation_trace(
     return trace
 
 
-def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, prequery=PREQUERY):
+def make_fig_010001(
+    covid_data_db,
+    X,
+    Y,
+    hue=HUE,
+    subhue="region",
+    query=QUERY,
+    prequery=PREQUERY,
+):
 
     covid_data = prep_pcm_dpc.parse_covid_data(covid_data_db)
     covid_data = covid_data.query(prequery)
@@ -75,15 +77,15 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
     )
     if X == "epidemic_age":
         addargs = dict(
-            range_x = (0, int(covid_data[X].max()) + 1),
+            range_x=(0, int(covid_data[X].max()) + 1),
             # range_y=(100, covid_data[Y].max() * 1.1),
         )
-        log_y=True
+        log_y = True
     else:
         addargs = {
-            #"range_y": (100, covid_data[Y].max() * 1.1),
+            # "range_y": (100, covid_data[Y].max() * 1.1),
         }
-        log_y=False
+        log_y = False
     fig = px.line(
         map_names(covid_data, language="it"),
         x=map_names(X),
@@ -96,10 +98,10 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         height=700,
         log_y=log_y,
         title=f"{TITLE_SLUG} Tutte le Regioni".ljust(36),
-        **addargs
+        **addargs,
     )
 
-    if  X == "epidemic_age":
+    if X == "epidemic_age":
         fig.add_traces(
             [
                 build_simulation_trace(
@@ -207,7 +209,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         simulations = traces_region[-3:]
         traces_region = pd.Series(traces_region[:-3])
     else:
-        simulations=[]
+        simulations = []
         traces_region = pd.Series(traces_region)
 
     but_region = dict(
@@ -215,7 +217,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=.25,
+        x=0.25,
         y=1.07,
         # xanchor="left",
         # active=0,
@@ -238,11 +240,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
                             "visible": [True]
                             * (len(traces_region) + len(simulations))
                         },
-                        {
-                            "title": f"{TITLE_SLUG} Tutte le Regioni".ljust(
-                                36
-                            )
-                        },
+                        {"title": f"{TITLE_SLUG} Tutte le Regioni".ljust(36)},
                     ],
                 ),
             ]
@@ -256,10 +254,9 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
                             + [True] * len(simulations)
                         },
                         {
-                            "title": "{} {}".format(
-                                TITLE_SLUG,
-                                region
-                            ).ljust(36)
+                            "title": "{} {}".format(TITLE_SLUG, region).ljust(
+                                36
+                            )
                         },
                     ],
                 )
@@ -316,7 +313,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
             type="date" if X != "epidemic_age" else "linear",
             showspikes=True,
         ),
-        yaxis=dict(showspikes=True)
+        yaxis=dict(showspikes=True),
     )
 
     return fig
@@ -330,15 +327,15 @@ if __name__ == "__main__":
         hue=HUE,
         subhue="region",
         query=QUERY,
-        prequery=PREQUERY
+        prequery=PREQUERY,
     )
 
     fig.write_html(
         os.path.join(EXPORT_DIR, "fig_010001.html"),
         config={
             # 'scrollZoom': "cartesian",
-            'displayModeBar': True,
-            'doubleClick': "reset+autosize",
+            # "displayModeBar": True,
+            "doubleClick": "reset+autosize",
             "displaylogo": False,
             # 'hoverCompareCartesian': True,
         },
@@ -352,11 +349,8 @@ if __name__ == "__main__":
         subhue="region",
         query="province != ''",
         prequery=(
-            "province != 'In fase di definizione/aggiornamento' "
-            f"& {Y} > 0"
-        )
+            "province != 'In fase di definizione/aggiornamento' " f"& {Y} > 0"
+        ),
     )
 
     fig.write_html(os.path.join(EXPORT_DIR, "fig_010000.html"))
-
-
