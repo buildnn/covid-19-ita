@@ -118,17 +118,17 @@ def make_fig_010001(
     # fig = go.Figure()
 
     # --- BUTTONS
-    button_layer_1_height = 1.12
-    button_layer_2_height = 1.065
+    button_layer_1_height = 1.14
+    # button_layer_2_height = 1.065
 
     but_yaxis_scale = dict(
         type="dropdown",
         direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=0.25,
+        x=0.4,
         xanchor="left",
-        y=1.07,
+        y=button_layer_1_height,
         yanchor="top",
         # direction="down",
         # pad={"r": 10, "t": 10},
@@ -217,8 +217,8 @@ def make_fig_010001(
         direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=0.25,
-        y=1.07,
+        x=0.4,
+        y=button_layer_1_height,
         # xanchor="left",
         # active=0,
         # y=button_layer_2_height,
@@ -281,7 +281,7 @@ def make_fig_010001(
                 source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
                 xref="paper",
                 yref="paper",
-                x=1,
+                x=.99,
                 y=1.05,
                 sizex=0.1,
                 sizey=0.1,
@@ -297,7 +297,7 @@ def make_fig_010001(
                 xref="paper",
                 yref="paper",
                 x=1,
-                y=1.01,
+                y=1.0,
                 # sizex=0.1, sizey=0.1,
                 xanchor="right",
                 yanchor="bottom",
