@@ -81,7 +81,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         log_y=True
     else:
         addargs = {
-            "range_y": (100, covid_data[Y].max() * 1.1),
+            #"range_y": (100, covid_data[Y].max() * 1.1),
         }
         log_y=False
     fig = px.line(
