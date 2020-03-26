@@ -38,11 +38,11 @@ def build_simulation_trace(
         dict(
             x=x_values[mask],
             y=simulation[mask],
-            # line=dict(color=color, width=0.5, dash="dot"),
-            line=dict(color=color, width=0.5),
+            line=dict(color=color, width=0.5, dash="dot"),
+            # line=dict(color=color, width=0.5),
             name=name,
-            # mode='lines+markers',
-            mode="lines",
+            mode='lines+markers',
+            # mode="lines",
             **kwargs,
         )
     )
@@ -76,7 +76,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
     if X == "epidemic_age":
         addargs = dict(
             range_x = (0, int(covid_data[X].max()) + 1),
-            range_y=(100, covid_data[Y].max() * 1.1),
+            # range_y=(100, covid_data[Y].max() * 1.1),
         )
         log_y=True
     else:
@@ -115,7 +115,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
 
     # fig = go.Figure()
 
-    # BUTTONS
+    # --- BUTTONS
     button_layer_1_height = 1.12
     button_layer_2_height = 1.065
 
@@ -124,7 +124,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         direction="right",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=0.01,
+        x=0.25,
         xanchor="left",
         y=1.07,
         yanchor="top",
@@ -164,7 +164,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
     )
 
     if X != "epidemic_age":
-        but_yaxis_scale["buttons"] = [but_yaxis_scale["buttons"][1], but_yaxis_scale["buttons"][0]]
+        but_yaxis_scale["buttons"] = [but_yaxis_scale["buttons"][1]]
 
     # but_hide_legend = dict(
     #     type = "buttons",
@@ -211,11 +211,12 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         traces_region = pd.Series(traces_region)
 
     but_region = dict(
-        type="buttons",
+        type="dropdown",
         direction="down",
         pad={"r": 10, "t": 10},
         showactive=True,
-        x=1.88,
+        x=.25,
+        y=1.07,
         # xanchor="left",
         # active=0,
         # y=button_layer_2_height,
@@ -268,7 +269,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
     )
 
     fig.update_layout(
-        margin=dict(t=100, b=120, l=30, r=70),
+        margin=dict(t=100, b=120, l=30, r=20),
         xaxis_showgrid=True,
         yaxis_showgrid=False,
         height=940,
@@ -284,7 +285,7 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
         #         showarrow=False,
         #     ),
         # ],
-        showlegend=False,
+        # showlegend=False,
     )
 
     # Range selector
@@ -313,7 +314,9 @@ def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, 
             # ),
             rangeslider=dict(visible=True),
             type="date" if X != "epidemic_age" else "linear",
+            showspikes=True,
         ),
+        yaxis=dict(showspikes=True)
     )
 
     return fig
@@ -330,7 +333,16 @@ if __name__ == "__main__":
         prequery=PREQUERY
     )
 
-    fig.write_html(os.path.join(EXPORT_DIR, "fig_010001.html"))
+    fig.write_html(
+        os.path.join(EXPORT_DIR, "fig_010001.html"),
+        config={
+            # 'scrollZoom': "cartesian",
+            'displayModeBar': True,
+            'doubleClick': "reset+autosize",
+            "displaylogo": False,
+            # 'hoverCompareCartesian': True,
+        },
+    )
 
     fig = make_fig_010001(
         "dpc-province",
