@@ -14,13 +14,24 @@ from covid_19_ita import HTML_DIR
 HUE = "province"
 X = "epidemic_age"
 Y = "tot_n_cases"
+PREQUERY = (
+    "province != 'In fase di definizione/aggiornamento' "
+    f"& {Y} > 0 & {X} >= 0"
+)
 QUERY = "epidemic_age >= 0"
+TITLE_SLUG = "Crescita dei casi:"
 
 EXPORT_DIR = os.path.join(HTML_DIR, "figures")
 
 
 def build_simulation_trace(
-    simulation, x_values, name, color, real_data, Y, **kwargs
+    simulation,
+    x_values,
+    name,
+    color,
+    real_data,
+    Y,
+    **kwargs
 ):
     mask = simulation < real_data[Y].max()
     trace = go.Scatter(
@@ -38,22 +49,20 @@ def build_simulation_trace(
     return trace
 
 
-def make_fig_010001():
+def make_fig_010001(covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, prequery=PREQUERY):
 
-    covid_data = prep_pcm_dpc.parse_covid_data("dpc-province")
-    covid_data = covid_data.query(
-        "province != 'In fase di definizione/aggiornamento'"
-    )
-    covid_data = covid_data.sort_values(["time", HUE])
-    covid_data
+    covid_data = prep_pcm_dpc.parse_covid_data(covid_data_db)
+    covid_data = covid_data.query(prequery)
+    covid_data = covid_data.sort_values(["time", hue])
+    covid_data = covid_data.query(query)
 
-    covid_data = covid_data.query(f"{Y} > 0")
-    covid_data = covid_data.query(f"{X} >= 0")
     covid_data["time"] = covid_data["time"].astype(str)
 
     # -----------
-
-    x_values = np.array(list(range(int(covid_data[X].max()))))
+    if X == "epidemic_age":
+        x_values = np.array(list(range(len(covid_data[X].unique()))))
+    else:
+        x_values = np.sort(covid_data[X].unique())
 
     doub_w = np.array(
         [int(100 * (2 ** (1 / 7)) ** i) for i in range(len(x_values))]
@@ -64,36 +73,45 @@ def make_fig_010001():
     doub_3d = np.array(
         [int(100 * (2 ** (1 / 3)) ** i) for i in range(len(x_values))]
     )
-
-    range_x = (0, int(covid_data[X].max()) + 1)
+    if X == "epidemic_age":
+        addargs = dict(
+            range_x = (0, int(covid_data[X].max()) + 1),
+            range_y=(100, covid_data[Y].max() * 1.1),
+        )
+        log_y=True
+    else:
+        addargs = {
+            "range_y": (100, covid_data[Y].max() * 1.1),
+        }
+        log_y=False
     fig = px.line(
-        map_names(covid_data.query(QUERY), language="it"),
-        x=map_names("epidemic_age"),
-        y=map_names("tot_n_cases"),
-        color=map_names("region"),
-        line_dash=map_names("province"),
+        map_names(covid_data, language="it"),
+        x=map_names(X),
+        y=map_names(Y),
+        color=map_names(subhue),
+        line_dash=map_names(hue),
         color_discrete_sequence=px.colors.qualitative.T10,
         template="plotly_white",
-        range_x=range_x,
         hover_data=[map_names("time")],
         height=700,
-        log_y=True,
-        range_y=(100, covid_data.tot_n_cases.max() * 1.1),
-        title="Crescita dei casi: Tutte le Regioni".ljust(36),
+        log_y=log_y,
+        title=f"{TITLE_SLUG} Tutte le Regioni".ljust(36),
+        **addargs
     )
 
-    fig.add_traces(
-        [
-            build_simulation_trace(
-                simulation, x_values, name, color, covid_data, Y
-            )
-            for simulation, name, color in zip(
-                [doub_d, doub_3d, doub_w],
-                ["2x ogni gg", "2x ogni 3gg", "2x ogni settimana"],
-                ["#3C1518", "#A44200", "#D58936"],
-            )
-        ]
-    )
+    if  X == "epidemic_age":
+        fig.add_traces(
+            [
+                build_simulation_trace(
+                    simulation, x_values, name, color, covid_data, Y
+                )
+                for simulation, name, color in zip(
+                    [doub_d, doub_3d, doub_w],
+                    ["2x ogni gg", "2x ogni 3gg", "2x ogni settimana"],
+                    ["#3C1518", "#A44200", "#D58936"],
+                )
+            ]
+        )
 
     # fig = go.Figure()
 
@@ -145,6 +163,9 @@ def make_fig_010001():
         ],
     )
 
+    if X != "epidemic_age":
+        but_yaxis_scale["buttons"] = [but_yaxis_scale["buttons"][1], but_yaxis_scale["buttons"][0]]
+
     # but_hide_legend = dict(
     #     type = "buttons",
     #     direction="right",
@@ -182,8 +203,13 @@ def make_fig_010001():
     traces_region = [
         trace["name"].split(", ")[0] for trace in fig.select_traces()
     ]
-    simulations = traces_region[-3:]
-    traces_region = pd.Series(traces_region[:-3])
+    if X == "epidemic_age":
+        simulations = traces_region[-3:]
+        traces_region = pd.Series(traces_region[:-3])
+    else:
+        simulations=[]
+        traces_region = pd.Series(traces_region)
+
     but_region = dict(
         type="buttons",
         direction="down",
@@ -212,7 +238,7 @@ def make_fig_010001():
                             * (len(traces_region) + len(simulations))
                         },
                         {
-                            "title": "Crescita dei casi: Tutte le Regioni".ljust(
+                            "title": f"{TITLE_SLUG} Tutte le Regioni".ljust(
                                 36
                             )
                         },
@@ -229,7 +255,8 @@ def make_fig_010001():
                             + [True] * len(simulations)
                         },
                         {
-                            "title": "Crescita dei casi: {}".format(
+                            "title": "{} {}".format(
+                                TITLE_SLUG,
                                 region
                             ).ljust(36)
                         },
@@ -285,7 +312,7 @@ def make_fig_010001():
             #     ])
             # ),
             rangeslider=dict(visible=True),
-            type="linear",
+            type="date" if X != "epidemic_age" else "linear",
         ),
     )
 
@@ -293,5 +320,31 @@ def make_fig_010001():
 
 
 if __name__ == "__main__":
-    fig = make_fig_010001()
+    fig = make_fig_010001(
+        "dpc-province",
+        X,
+        Y,
+        hue=HUE,
+        subhue="region",
+        query=QUERY,
+        prequery=PREQUERY
+    )
+
     fig.write_html(os.path.join(EXPORT_DIR, "fig_010001.html"))
+
+    fig = make_fig_010001(
+        "dpc-province",
+        "time",
+        Y,
+        hue=HUE,
+        subhue="region",
+        query="province != ''",
+        prequery=(
+            "province != 'In fase di definizione/aggiornamento' "
+            f"& {Y} > 0"
+        )
+    )
+
+    fig.write_html(os.path.join(EXPORT_DIR, "fig_010000.html"))
+
+
