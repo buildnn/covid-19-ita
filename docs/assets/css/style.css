@@ -189,3 +189,10 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   color: #000000!important;
 }
 
+.reading-info {
+  text-transform: lowercase;
+  padding: 4px 0 4px 10px;
+  margin-left: 10px;
+  border-left: 1px solid #ddd;
+}
+
