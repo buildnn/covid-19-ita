@@ -349,6 +349,7 @@ if __name__ == "__main__":
 
     fig.write_html(
         os.path.join(EXPORT_DIR, "fig_010001.html"),
+        include_plotlyjs="cdn",
         config={
             "scrollZoom": True,
             "doubleClick": False,
@@ -372,4 +373,11 @@ if __name__ == "__main__":
         ),
     )
 
-    fig.write_html(os.path.join(EXPORT_DIR, "fig_010000.html"))
+    fig.write_html(
+        os.path.join(EXPORT_DIR, "fig_010000.html"),
+        include_plotlyjs="cdn",
+        config={
+            "displaylogo": False,
+            # 'hoverCompareCartesian': True,
+        },
+    )
