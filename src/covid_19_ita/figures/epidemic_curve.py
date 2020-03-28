@@ -99,7 +99,7 @@ def make_fig_010001(
         hover_data=[map_names("time")],
         height=700,
         log_y=log_y,
-        range_y=(covid_data[Y].min(), covid_data[Y].max()),
+        # range_y=(covid_data[Y].min(), covid_data[Y].max()),
         title=f"{TITLE_SLUG} Tutte le Regioni".ljust(36),
         **addargs,
     )
@@ -121,7 +121,7 @@ def make_fig_010001(
     # fig = go.Figure()
 
     # --- BUTTONS
-    button_layer_1_height = 1.14
+    button_layer_1_height = 1.1
     # button_layer_2_height = 1.065
 
     but_yaxis_scale = dict(
@@ -237,7 +237,7 @@ def make_fig_010001(
             [
                 dict(
                     label="Tutte le Regioni",
-                    method="restyle",
+                    method="update",
                     args=[
                         {
                             "visible": [True]
@@ -264,7 +264,7 @@ def make_fig_010001(
             + [
                 dict(
                     label=region,
-                    method="restyle",
+                    method="update",
                     args=[
                         {
                             "visible": [r == region for r in traces_region]
