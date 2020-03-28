@@ -63,8 +63,10 @@ def make_fig_010001(
     # -----------
     if X == "epidemic_age":
         x_values = np.array(list(range(len(covid_data[X].unique()))))
+        minx = 0.
     else:
         x_values = np.sort(covid_data[X].unique())
+        minx = covid_data[X].min()
 
     doub_w = np.array(
         [int(100 * (2 ** (1 / 7)) ** i) for i in range(len(x_values))]
@@ -97,6 +99,7 @@ def make_fig_010001(
         hover_data=[map_names("time")],
         height=700,
         log_y=log_y,
+        range_y=(covid_data[Y].min(), covid_data[Y].max()),
         title=f"{TITLE_SLUG} Tutte le Regioni".ljust(36),
         **addargs,
     )
@@ -240,6 +243,10 @@ def make_fig_010001(
                             "visible": [True]
                             * (len(traces_region) + len(simulations))
                         },
+                        {
+                            "yaxis": {"range": (covid_data[Y].min(), covid_data[Y].max())},
+                            "xaxis": {"range": (covid_data[X].min(), covid_data[X].max())},
+                        },
                         {"title": f"{TITLE_SLUG} Tutte le Regioni".ljust(36)},
                     ],
                 ),
@@ -252,6 +259,26 @@ def make_fig_010001(
                         {
                             "visible": [r == region for r in traces_region]
                             + [True] * len(simulations)
+                        },
+                        {
+                            "yaxis": {
+                                "range": (
+                                    100,
+                                    covid_data.loc[
+                                        covid_data.region == region, Y
+                                    ].max(),
+                                )
+                            },
+                            "xaxis": {
+                                "range": (
+                                    covid_data.loc[
+                                        covid_data.region == region, X
+                                    ].min(),
+                                    covid_data.loc[
+                                        covid_data.region == region, X
+                                    ].max(),
+                                )
+                            },
                         },
                         {
                             "title": "{} {}".format(TITLE_SLUG, region).ljust(
@@ -281,7 +308,7 @@ def make_fig_010001(
                 source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
                 xref="paper",
                 yref="paper",
-                x=.99,
+                x=0.99,
                 y=1.05,
                 sizex=0.1,
                 sizey=0.1,
@@ -326,7 +353,7 @@ def make_fig_010001(
             #     ])
             # ),
             fixedrange=True,
-            rangeslider=dict(visible=True),
+            # rangeslider=dict(visible=True),
             type="date" if X != "epidemic_age" else "linear",
             showspikes=True,
         ),
