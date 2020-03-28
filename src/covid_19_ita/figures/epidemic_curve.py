@@ -63,7 +63,7 @@ def make_fig_010001(
     # -----------
     if X == "epidemic_age":
         x_values = np.array(list(range(len(covid_data[X].unique()))))
-        minx = 0.
+        minx = 0.0
     else:
         x_values = np.sort(covid_data[X].unique())
         minx = covid_data[X].min()
@@ -125,8 +125,8 @@ def make_fig_010001(
     # button_layer_2_height = 1.065
 
     but_yaxis_scale = dict(
-        type="dropdown",
-        direction="down",
+        type="buttons",
+        direction="right",
         pad={"r": 10, "t": 10},
         showactive=True,
         x=0.4,
@@ -237,15 +237,25 @@ def make_fig_010001(
             [
                 dict(
                     label="Tutte le Regioni",
-                    method="update",
+                    method="restyle",
                     args=[
                         {
                             "visible": [True]
                             * (len(traces_region) + len(simulations))
                         },
                         {
-                            "yaxis": {"range": (covid_data[Y].min(), covid_data[Y].max())},
-                            "xaxis": {"range": (covid_data[X].min(), covid_data[X].max())},
+                            "yaxis": {
+                                "range": (
+                                    covid_data[Y].min(),
+                                    covid_data[Y].max(),
+                                ),
+                            },
+                            "xaxis": {
+                                "range": (
+                                    covid_data[X].min(),
+                                    covid_data[X].max(),
+                                )
+                            },
                         },
                         {"title": f"{TITLE_SLUG} Tutte le Regioni".ljust(36)},
                     ],
@@ -254,7 +264,7 @@ def make_fig_010001(
             + [
                 dict(
                     label=region,
-                    method="update",
+                    method="restyle",
                     args=[
                         {
                             "visible": [r == region for r in traces_region]
@@ -267,7 +277,7 @@ def make_fig_010001(
                                     covid_data.loc[
                                         covid_data.region == region, Y
                                     ].max(),
-                                )
+                                ),
                             },
                             "xaxis": {
                                 "range": (
