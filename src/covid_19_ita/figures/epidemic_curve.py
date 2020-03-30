@@ -68,11 +68,11 @@ def make_fig_010001(
         x_values = np.sort(covid_data[X].unique())
         minx = covid_data[X].min()
 
+    doub_2w = np.array(
+        [int(100 * (2 ** (1 / 14)) ** i) for i in range(len(x_values))]
+    )
     doub_w = np.array(
         [int(100 * (2 ** (1 / 7)) ** i) for i in range(len(x_values))]
-    )
-    doub_d = np.array(
-        [int(100 * (2 ** (1 / 1)) ** i) for i in range(len(x_values))]
     )
     doub_3d = np.array(
         [int(100 * (2 ** (1 / 3)) ** i) for i in range(len(x_values))]
@@ -111,8 +111,8 @@ def make_fig_010001(
                     simulation, x_values, name, color, covid_data, Y
                 )
                 for simulation, name, color in zip(
-                    [doub_d, doub_3d, doub_w],
-                    ["2x ogni gg", "2x ogni 3gg", "2x ogni settimana"],
+                    [doub_3d, doub_w, doub_2w],
+                    ["2x ogni 3gg", "2x ogni settimana", "2x ogni 2settimane"],
                     ["#3C1518", "#A44200", "#D58936"],
                 )
             ]
