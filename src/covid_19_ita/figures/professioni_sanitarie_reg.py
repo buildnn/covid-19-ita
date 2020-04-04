@@ -14,6 +14,38 @@ from covid_19_ita import HTML_DIR
 
 EXPORT_DIR = os.path.join(HTML_DIR, "figures", "tortuga", "III")
 
+
+def add_buildnn_watermark(fig):
+    fig.update_layout(
+        images=[
+            dict(
+                source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
+                xref="paper",
+                yref="paper",
+                x=1.05,
+                y=1.16,
+                sizex=0.12,
+                sizey=0.12,
+                xanchor="right",
+                yanchor="bottom",
+            )
+        ],
+        annotations=[
+            dict(
+                text='<span  style="font-size: 9px">by '
+                '<a href="https://www.buildnn.com">BuildNN</a></span>',
+                showarrow=False,
+                xref="paper",
+                yref="paper",
+                x=1.06,
+                y=1.09,
+                xanchor="right",
+                yanchor="bottom",
+            ),
+        ],
+    )
+
+
 if __name__ == "__main__":
     medici_df = pd.read_csv(
         "https://docs.google.com/spreadsheets/d/e/"
@@ -69,6 +101,7 @@ if __name__ == "__main__":
         xaxis=dict(showgrid=True, zeroline=False),
         yaxis=dict(showgrid=True, zeroline=False),
     )
+    add_buildnn_watermark(f1)
     f1.write_html(
         os.path.join(EXPORT_DIR, "box_01.html"),
         include_plotlyjs="cdn",
@@ -106,6 +139,7 @@ if __name__ == "__main__":
             xaxis=dict(showgrid=True, zeroline=False),
             yaxis=dict(showgrid=True, zeroline=False),
         )
+        add_buildnn_watermark(f2)
         f2.write_html(
             os.path.join(EXPORT_DIR, f"box_02{ramo}.html"),
             include_plotlyjs="cdn",
