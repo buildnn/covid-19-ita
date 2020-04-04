@@ -42,8 +42,20 @@ def add_buildnn_watermark(fig):
                 xanchor="right",
                 yanchor="bottom",
             ),
+            dict(
+                xref="paper",
+                yref="paper",
+                x=0.5,
+                y=-0.4,
+                xanchor="center",
+                yanchor="bottom",
+                text="Fonte: elaborazione Tortuga su dati ISTAT",
+                font=dict(family="Arial", size=12, color="rgb(150,150,150)"),
+                showarrow=False,
+            ),
         ],
     )
+    return fig
 
 
 if __name__ == "__main__":
@@ -95,9 +107,9 @@ if __name__ == "__main__":
         title_y=0.94,
         width=600,
         height=450,
-        margin={"r": 40, "b": 80, "t": 80, "l": 40},
+        margin={"r": 40, "b": 110, "t": 80, "l": 40},
         legend_orientation="h",
-        legend={"y": -0.25},
+        legend={"y": -0.21},
         xaxis=dict(showgrid=True, zeroline=False),
         yaxis=dict(showgrid=True, zeroline=False),
     )
@@ -133,9 +145,9 @@ if __name__ == "__main__":
             title_y=0.94,
             width=600,
             height=450,
-            margin={"r": 40, "b": 80, "t": 80, "l": 40},
+            margin={"r": 40, "b": 110, "t": 80, "l": 40},
             legend_orientation="h",
-            legend={"y": -0.25},
+            legend={"y": -0.21},
             xaxis=dict(showgrid=True, zeroline=False),
             yaxis=dict(showgrid=True, zeroline=False),
         )
