@@ -19,7 +19,9 @@ def add_buildnn_watermark(fig):
     fig.update_layout(
         images=[
             dict(
-                source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
+                source="https://media-exp1.licdn.com/dms/image/"
+                "C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?"
+                "e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
                 xref="paper",
                 yref="paper",
                 x=1.05,
@@ -69,6 +71,13 @@ if __name__ == "__main__":
     medici_df.replace("PA_trento", "P.A. Trento")
     medici_df = medici_df[medici_df.Regione != ""]
     medici_df
+
+    rientro = pd.read_csv(
+        "https://docs.google.com/spreadsheets/d/e/"
+        "2PACX-1vRNSiOhlGO4r2Dh2cSr2zJbQ-iUfqqbQojs"
+        "aTe4z1omzhuIjI_fzJCoD3EFNzgCeXMeX-3cVsZK1hZS/pub?output=csv"
+        "&gid=518867510"
+    )
 
     melted = medici_df.melt(
         id_vars=["Regione", "Anno", "Adempiente"],
@@ -163,41 +172,150 @@ if __name__ == "__main__":
         )
         f2.show()
 
-    # f3 = px.bar(
-    #     medici_df,
-    #     x="Regione",
-    #     y="LEA",
-    #     animation_frame="Anno",
-    #     animation_group="Regione",
-    #     color="LEA",
-    #     color_continuous_scale=px.colors.cyclical.IceFire[1:-1],
-    #     template="plotly_dark",
-    # ).update_layout(
-    #     title="<b>Punteggio LEA per Regione nel Tempo</b>",
-    #     title_x=0.5,
-    #     title_y=0.94,
-    #     width=600,
-    #     height=450,
-    #     margin={"r": 40, "b": 160, "t": 80, "l": 40},
-    #     legend_orientation="h",
-    #     legend={"y": -0.25},
-    #     xaxis=dict(showgrid=True, zeroline=False, title=None),
-    #     yaxis=dict(showgrid=True, zeroline=False),
-    # )
-    # f3.write_html(
-    #     os.path.join(EXPORT_DIR, f"fig_03.html"),
-    #     include_plotlyjs="cdn",
-    #     config={
-    #         # "displayModeBar": True,
-    #         "displaylogo": False,
-    #         # 'hoverCompareCartesian': True,
-    #     },
-    # )
-    # f3
+    f3 = px.line(
+        medici_df, x="Anno", y="Medici_spec", color="Regione", template="plotly_dark",
+    ).update_layout(
+        title="<b>Punteggio LEA per Regione nel Tempo</b>",
+        title_x=0.5,
+        title_y=0.94,
+        width=600,
+        height=450,
+        margin={"r": 40, "b": 160, "t": 80, "l": 40},
+        legend_orientation="h",
+        # legend={"y": -0.25},
+        xaxis=dict(showgrid=True, zeroline=False, title=None),
+        yaxis=dict(showgrid=True, zeroline=False),
+    )
+    f3
+    f3.write_html(
+        os.path.join(EXPORT_DIR, f"fig_03.html"),
+        include_plotlyjs="cdn",
+        config={
+            # "displayModeBar": True,
+            "displaylogo": False,
+            # 'hoverCompareCartesian': True,
+        },
+    )
+
+    for var in ["Medici_spec", "Prof_san"]:
+        lb = mappa_nomi[var]
+        f4 = px.line(
+            medici_df,
+            x="Anno",
+            y=var,
+            color="Regione",
+            template="plotly_white",
+            line_shape="spline",
+            # facet_row="Adempiente",
+            # line_dash="Regione",
+            labels=mappa_nomi,
+            color_discrete_sequence=px.colors.qualitative.T10,
+            width=600,
+            height=700,
+        )
+        for trace in f4.data:
+            trace.update(mode="markers+lines")
+        f4.update_layout(
+            height=600,
+            width=600,
+            legend=dict(orientation="h", y=-0.18),
+            margin={"r": 20, "l": 60, "b": 230},
+            title=dict(text=f"<b>{lb} per Regione</b>", x=0.5, xanchor="center",),
+            xaxis=dict(showgrid=True, zeroline=False),
+            yaxis=dict(showgrid=True, zeroline=False, title="Numero per 1000 abitanti"),
+            images=[
+                dict(
+                    source="https://media-exp1.licdn.com/dms/image/"
+                    "C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?"
+                    "e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
+                    xref="paper",
+                    yref="paper",
+                    x=1.01,
+                    y=1.06,
+                    sizex=0.12,
+                    sizey=0.12,
+                    xanchor="right",
+                    yanchor="bottom",
+                )
+            ],
+            annotations=[
+                dict(
+                    text='<span  style="font-size: 9px">by '
+                    '<a href="https://www.buildnn.com">BuildNN</a></span>',
+                    showarrow=False,
+                    xref="paper",
+                    yref="paper",
+                    x=1.03,
+                    y=1.0,
+                    xanchor="right",
+                    yanchor="bottom",
+                ),
+                dict(
+                    xref="paper",
+                    yref="paper",
+                    x=0.5,
+                    y=-0.72,
+                    xanchor="center",
+                    yanchor="bottom",
+                    text="Fonte: elaborazione Tortuga su dati ISTAT",
+                    font=dict(family="Arial", size=12, color="rgb(150,150,150)"),
+                    showarrow=False,
+                ),
+            ],
+        )
+        f4.write_html(
+            os.path.join(EXPORT_DIR, f"fig_04{var}.html"),
+            include_plotlyjs="cdn",
+            config={
+                # "displayModeBar": True,
+                "displaylogo": False,
+                # 'hoverCompareCartesian': True,
+            },
+        )
+        f4.show()
+
+    for var in ["Totale medici", "Professioni sanitarie"]:
+        f5 = px.bar(
+            rientro.query(f"Var == '{var}'"),
+            x="Anno",
+            y="Variazione media",
+            barmode="group",
+            color="Tipo",
+            template="plotly_white",
+        )
+        f5.update_layout(
+            width=600,
+            height=450,
+            legend=dict(orientation="h", y=-0.18),
+            margin={"r": 40, "b": 110, "t": 80, "l": 40},
+            title=dict(
+                text=f"<br><b>{lb}</b></br>Variazione Media vs. Anno Precedente",
+                x=0.5,
+                xanchor="center",
+            ),
+            xaxis=dict(showgrid=True, zeroline=False),
+            yaxis=dict(
+                showgrid=True,
+                zeroline=False,
+                title="Numero per 1000 abitanti",
+                tickformat=",.1%",
+            ),
+        )
+        add_buildnn_watermark(f5)
+        f5.write_html(
+            os.path.join(EXPORT_DIR, f"fig_05{var}.html"),
+            include_plotlyjs="cdn",
+            config={
+                # "displayModeBar": True,
+                "displaylogo": False,
+                # 'hoverCompareCartesian': True,
+            },
+        )
+        f5.show()
 
     # for Y in ["LEA", "Medici_spec", "Medici_tot", "Prof_san"]:
 
-    #     fig = px.line(
+    #     f4 = px.line(
     #         medici_df.assign(Anno=pd.to_datetime(medici_df.Anno.astype(str))).dropna(
     #             subset=[Y]
     #         ),
