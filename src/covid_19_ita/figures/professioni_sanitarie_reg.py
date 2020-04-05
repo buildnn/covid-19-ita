@@ -140,7 +140,7 @@ if __name__ == "__main__":
             labels={ramo: "N. Per 1000 ab."},
         ).update_layout(
             title="<br><b>Personale Sanitario Per 1000 abitanti</b></br>"
-            f"{lb}: Adempienti vs. Non Adempienti",
+            f"{lb}: Regioni Adempienti vs. Non Adempienti",
             title_x=0.5,
             title_y=0.94,
             width=600,
