@@ -289,7 +289,7 @@ if __name__ == "__main__":
             legend=dict(orientation="h", y=-0.18),
             margin={"r": 40, "b": 110, "t": 80, "l": 40},
             title=dict(
-                text=f"<br><b>{lb}</b></br>Variazione Media vs. Anno Precedente",
+                text=f"<br><b>{var}</b></br>Variazione Media vs. Anno Precedente",
                 x=0.5,
                 xanchor="center",
             ),
