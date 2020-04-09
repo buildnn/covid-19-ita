@@ -1,0 +1,16 @@
+template: chart.html
+desc_file: config/test.md
+variables:
+    title: Test | Covid-19
+    title_ln_1: Contagi per Provincia
+    title_ln_2: Evoluzione a partire dal 100° Caso
+    timestamp: 25 Mar 2020
+    full_stars: 4
+    half_stars: 1
+    empt_stars: 1
+    data_sources:
+         Dipartimento di Protezione Civile: https://github.com/pcm-dpc/COVID-19
+    authors:
+        BuildNN: https://www.buildnn.com
+    figure: figures/fig_010001.html
+    frame_style: "max-width: 850px;height: 700px;"

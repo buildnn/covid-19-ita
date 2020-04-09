@@ -4,6 +4,8 @@ requests
 pandas
 lxml
 xlrd
+pyyaml
+markdown
 xlwt
 numpy
 
