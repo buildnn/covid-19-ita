@@ -1,5 +1,9 @@
 template: chart.html
-desc_file: config/test.md
+desc_file: test.md
+chapters:
+    - 01
+tags:
+    visualizzazione dati: info
 variables:
     title: Test | Covid-19
     title_ln_1: Contagi per Provincia
@@ -12,5 +16,6 @@ variables:
          Dipartimento di Protezione Civile: https://github.com/pcm-dpc/COVID-19
     authors:
         BuildNN: https://www.buildnn.com
-    figure: figures/fig_010001.html
-    frame_style: "max-width: 850px;height: 700px;"
+    hero_embed:
+        figure: figures/fig_010001.html
+        frame_style: "max-width: 850px;height: 700px;"

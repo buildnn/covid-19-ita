@@ -43,7 +43,7 @@ def build_simulation_trace(
     return trace
 
 
-def make_fig_010001(
+def make_plot(
     covid_data_db,
     X,
     Y,
@@ -374,7 +374,7 @@ def make_fig_010001(
 
 
 if __name__ == "__main__":
-    fig = make_fig_010001(
+    fig = make_plot(
         "dpc-province",
         X,
         Y,
@@ -385,7 +385,7 @@ if __name__ == "__main__":
     )
 
     fig.write_html(
-        os.path.join(EXPORT_DIR, "fig_010001.html"),
+        os.path.join(EXPORT_DIR, "fig_0001.html"),
         include_plotlyjs="cdn",
         config={
             "scrollZoom": True,
@@ -398,7 +398,7 @@ if __name__ == "__main__":
         },
     )
 
-    fig = make_fig_010001(
+    fig = make_plot(
         "dpc-province",
         "time",
         Y,
@@ -411,7 +411,7 @@ if __name__ == "__main__":
     )
 
     fig.write_html(
-        os.path.join(EXPORT_DIR, "fig_010000.html"),
+        os.path.join(EXPORT_DIR, "fig_0002.html"),
         include_plotlyjs="cdn",
         config={
             "displaylogo": False,

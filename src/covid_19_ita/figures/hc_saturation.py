@@ -90,7 +90,7 @@ if __name__ == "__main__":
     )
 
     fig.write_html(
-        os.path.join(EXPORT_DIR, "fig_010004.html"),
+        os.path.join(EXPORT_DIR, "fig_0003.html"),
         include_plotlyjs="cdn",
         config={
             "scrollZoom": True,

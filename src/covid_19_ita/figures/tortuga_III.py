@@ -11,39 +11,14 @@ import os
 import pandas as pd
 import plotly.express as px
 from covid_19_ita import HTML_DIR
+from covid_19_ita.utils import watermark
 
 EXPORT_DIR = os.path.join(HTML_DIR, "figures", "tortuga", "III")
 
 
-def add_buildnn_watermark(fig):
+def add_source(fig):
     fig.update_layout(
-        images=[
-            dict(
-                source="https://media-exp1.licdn.com/dms/image/"
-                "C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?"
-                "e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
-                xref="paper",
-                yref="paper",
-                x=1.05,
-                y=1.16,
-                sizex=0.12,
-                sizey=0.12,
-                xanchor="right",
-                yanchor="bottom",
-            )
-        ],
         annotations=[
-            dict(
-                text='<span  style="font-size: 9px">by '
-                '<a href="https://www.buildnn.com">BuildNN</a></span>',
-                showarrow=False,
-                xref="paper",
-                yref="paper",
-                x=1.06,
-                y=1.09,
-                xanchor="right",
-                yanchor="bottom",
-            ),
             dict(
                 xref="paper",
                 yref="paper",
@@ -111,20 +86,21 @@ if __name__ == "__main__":
         labels=mappa_nomi,
     ).update_layout(
         title="<br><b>Personale Sanitario Per 1000 abitanti</b></br>"
-        "Distribuzione nel Tempo del Valore per Regione",
+        '<span style="font-size: 14px;">Distribuzione nel Tempo del Valore per Regione</span>',
         title_x=0.5,
-        title_y=0.94,
+        title_y=0.96,
         width=600,
         height=450,
-        margin={"r": 40, "b": 110, "t": 80, "l": 40},
+        margin={"r": 20, "b": 110, "t": 80, "l": 40, "autoexpand": False},
         legend_orientation="h",
         legend={"y": -0.21},
         xaxis=dict(showgrid=True, zeroline=False),
         yaxis=dict(showgrid=True, zeroline=False),
     )
-    add_buildnn_watermark(f1)
+    add_source(f1)
+    watermark(f1)
     f1.write_html(
-        os.path.join(EXPORT_DIR, "box_01.html"),
+        os.path.join(EXPORT_DIR, "fig_0001.html"),
         include_plotlyjs="cdn",
         config={
             # "displayModeBar": True,
@@ -134,7 +110,7 @@ if __name__ == "__main__":
     )
     f1
 
-    for ramo, lb in mappa_nomi.items():
+    for n, (ramo, lb) in enumerate(mappa_nomi.items()):
         f2 = px.box(
             medici_df.dropna(subset=["Adempiente"]),
             x="Anno",
@@ -149,20 +125,21 @@ if __name__ == "__main__":
             labels={ramo: "N. Per 1000 ab."},
         ).update_layout(
             title="<br><b>Personale Sanitario Per 1000 abitanti</b></br>"
-            f"{lb}: Regioni Adempienti vs. Non Adempienti",
+            f'<span style="font-size: 14px;">{lb}: Regioni Adempienti vs. Non Adempienti</span>',
             title_x=0.5,
-            title_y=0.94,
+            title_y=0.96,
             width=600,
             height=450,
-            margin={"r": 40, "b": 110, "t": 80, "l": 40},
+            margin={"r": 20, "b": 110, "t": 80, "l": 40, "autoexpand": False},
             legend_orientation="h",
             legend={"y": -0.21},
             xaxis=dict(showgrid=True, zeroline=False),
             yaxis=dict(showgrid=True, zeroline=False),
         )
-        add_buildnn_watermark(f2)
+        add_source(f2)
+        watermark(f2)
         f2.write_html(
-            os.path.join(EXPORT_DIR, f"box_02{ramo}.html"),
+            os.path.join(EXPORT_DIR, f"fig_{2+n:04d}.html"),
             include_plotlyjs="cdn",
             config={
                 # "displayModeBar": True,
@@ -172,23 +149,27 @@ if __name__ == "__main__":
         )
         f2.show()
 
-    f3 = px.line(
-        medici_df, x="Anno", y="Medici_spec", color="Regione", template="plotly_dark",
+    f5 = px.line(
+        medici_df,
+        x="Anno",
+        y="Medici_spec",
+        color="Regione",
+        template="plotly_dark",
     ).update_layout(
         title="<b>Punteggio LEA per Regione nel Tempo</b>",
         title_x=0.5,
-        title_y=0.94,
+        title_y=0.96,
         width=600,
         height=450,
-        margin={"r": 40, "b": 160, "t": 80, "l": 40},
+        margin={"r": 20, "b": 110, "t": 80, "l": 40, "autoexpand": False},
         legend_orientation="h",
         # legend={"y": -0.25},
         xaxis=dict(showgrid=True, zeroline=False, title=None),
         yaxis=dict(showgrid=True, zeroline=False),
     )
-    f3
-    f3.write_html(
-        os.path.join(EXPORT_DIR, f"fig_03.html"),
+    watermark(f5)
+    f5.write_html(
+        os.path.join(EXPORT_DIR, f"fig_0005.html"),
         include_plotlyjs="cdn",
         config={
             # "displayModeBar": True,
@@ -197,9 +178,10 @@ if __name__ == "__main__":
         },
     )
 
-    for var in ["Medici_spec", "Prof_san"]:
+    # f6-7
+    for n, var in enumerate(["Medici_spec", "Prof_san"]):
         lb = mappa_nomi[var]
-        f4 = px.line(
+        f6 = px.line(
             medici_df,
             x="Anno",
             y=var,
@@ -213,43 +195,21 @@ if __name__ == "__main__":
             width=600,
             height=700,
         )
-        for trace in f4.data:
+        for trace in f6.data:
             trace.update(mode="markers+lines")
-        f4.update_layout(
+        f6.update_layout(
             height=600,
             width=600,
             legend=dict(orientation="h", y=-0.18),
-            margin={"r": 20, "l": 60, "b": 230},
-            title=dict(text=f"<b>{lb} per Regione</b>", x=0.5, xanchor="center",),
-            xaxis=dict(showgrid=True, zeroline=False),
-            yaxis=dict(showgrid=True, zeroline=False, title="Numero per 1000 abitanti"),
-            images=[
-                dict(
-                    source="https://media-exp1.licdn.com/dms/image/"
-                    "C4D0BAQFsEw0kedrArQ/company-logo_200_200/0?"
-                    "e=1593043200&v=beta&t=UJ-7KQbrKQz-6NUbBCP706EzxNQVzt9ZftyH_Z46oNo",
-                    xref="paper",
-                    yref="paper",
-                    x=1.01,
-                    y=1.06,
-                    sizex=0.12,
-                    sizey=0.12,
-                    xanchor="right",
-                    yanchor="bottom",
-                )
-            ],
+            margin={"r": 20, "l": 60, "t": 80, "b": 230, "autoexpand": False},
+            title=dict(
+                text=f"<b>{lb} per Regione</b>", x=0.5, xanchor="center",
+            ),
+            xaxis=dict(showgrid=True, zeroline=False, title=None),
+            yaxis=dict(
+                showgrid=True, zeroline=False, title="Numero per 1000 abitanti"
+            ),
             annotations=[
-                dict(
-                    text='<span  style="font-size: 9px">by '
-                    '<a href="https://www.buildnn.com">BuildNN</a></span>',
-                    showarrow=False,
-                    xref="paper",
-                    yref="paper",
-                    x=1.03,
-                    y=1.0,
-                    xanchor="right",
-                    yanchor="bottom",
-                ),
                 dict(
                     xref="paper",
                     yref="paper",
@@ -258,13 +218,17 @@ if __name__ == "__main__":
                     xanchor="center",
                     yanchor="bottom",
                     text="Fonte: elaborazione Tortuga su dati ISTAT",
-                    font=dict(family="Arial", size=12, color="rgb(150,150,150)"),
+                    font=dict(
+                        family="Arial", size=12, color="rgb(150,150,150)"
+                    ),
                     showarrow=False,
                 ),
             ],
         )
-        f4.write_html(
-            os.path.join(EXPORT_DIR, f"fig_04{var}.html"),
+        watermark(f6)
+        f6.show()
+        f6.write_html(
+            os.path.join(EXPORT_DIR, f"fig_{6+n:04d}.html"),
             include_plotlyjs="cdn",
             config={
                 # "displayModeBar": True,
@@ -272,10 +236,10 @@ if __name__ == "__main__":
                 # 'hoverCompareCartesian': True,
             },
         )
-        f4.show()
 
-    for var in ["Totale medici", "Professioni sanitarie"]:
-        f5 = px.bar(
+    #f8-9
+    for n, var in enumerate(["Totale medici", "Professioni sanitarie"]):
+        f8 = px.bar(
             rientro.query(f"Var == '{var}'"),
             x="Anno",
             y="Variazione media",
@@ -283,14 +247,15 @@ if __name__ == "__main__":
             color="Tipo",
             template="plotly_white",
         )
-        f5.update_layout(
+        f8.update_layout(
             width=600,
             height=450,
             legend=dict(orientation="h", y=-0.18),
-            margin={"r": 40, "b": 110, "t": 80, "l": 40},
+            margin={"r": 20, "b": 110, "t": 80, "l": 60, "autoexpand": False},
             title=dict(
                 text=f"<br><b>{var}</b></br>Variazione Media vs. Anno Precedente",
                 x=0.5,
+                y=.96,
                 xanchor="center",
             ),
             xaxis=dict(showgrid=True, zeroline=False),
@@ -301,9 +266,11 @@ if __name__ == "__main__":
                 tickformat=",.1%",
             ),
         )
-        add_buildnn_watermark(f5)
-        f5.write_html(
-            os.path.join(EXPORT_DIR, f"fig_05{var}.html"),
+        add_source(f8)
+        watermark(f8)
+        f8.show()
+        f8.write_html(
+            os.path.join(EXPORT_DIR, f"fig_{15+n:04d}.html"),
             include_plotlyjs="cdn",
             config={
                 # "displayModeBar": True,
@@ -311,7 +278,6 @@ if __name__ == "__main__":
                 # 'hoverCompareCartesian': True,
             },
         )
-        f5.show()
 
     # for Y in ["LEA", "Medici_spec", "Medici_tot", "Prof_san"]:
 

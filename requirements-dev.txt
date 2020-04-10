@@ -1,6 +1,8 @@
 flake8
 sphinx
 black
+flask
+python-dotenv
 
 ipython
 jupyter
