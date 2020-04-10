@@ -10,6 +10,21 @@ import plotly.graph_objects as go
 
 pd.options.display.max_rows = 6
 
+programmi = [
+    "Coordinamento generale in materia di tutela della "
+    "salute, innovazione e politiche internazionali",
+    "Ricerca per il settore della sanita' pubblica",
+    "Sanita' pubblica veterinaria",
+    "Vigilanza, prevenzione e repressione nel settore sanitario",
+    "Comunicazione e promozione per la tutela della salute umana e della "
+    "sanita' pubblica veterinaria e attivita' e coordinamento in ambito internazionale",
+]
+p2 = [
+    "Protezione civile",
+    "Ricerca di base e applicata",
+    "Interventi per pubbliche calamita'",
+]
+
 
 def get_covid_datasets():
     # ECDC covid data
@@ -72,8 +87,7 @@ def get_bilancio_datasets():
     bilancio = pd.concat([pd.read_csv(bilancio_1), pd.read_csv(bilancio_2)])
 
     bilancio_prep = (
-        bilancio
-        .loc[
+        bilancio.loc[
             bilancio["Descrizione Programma"].isin(programmi + p2),  # rows
             [  # cols
                 "Descrizione Amministrazione",
@@ -81,15 +95,18 @@ def get_bilancio_datasets():
                 "Descrizione Azione",
                 "Descrizione Missione",
                 "Previsioni iniziali competenza",
-            ]
+            ],
         ]
-        .groupby([
-            "Descrizione Amministrazione",
-            "Descrizione Programma",
-            "Descrizione Missione",
-            "Descrizione Azione",
-        ]).sum()
-        .sort_values(by=['Previsioni iniziali competenza'], ascending=False)
+        .groupby(
+            [
+                "Descrizione Amministrazione",
+                "Descrizione Programma",
+                "Descrizione Missione",
+                "Descrizione Azione",
+            ]
+        )
+        .sum()
+        .sort_values(by=["Previsioni iniziali competenza"], ascending=False)
         .sort_index(level=[0, 1])
     )
 
@@ -156,5 +173,5 @@ def plot(
     update_kwa.update(update_layout_kwargs)
 
     fig.update_layout(**update_kwa)
-    watermark(fig)
-    return fig
+    
+    return watermark(fig)
