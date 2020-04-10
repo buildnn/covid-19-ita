@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block twitter_title %}{{ title }} | COVID-19 Ita{% endblock %}
+
+{% block content %}
+<main class="page blog-post-list">
+    <section class="clean-block clean-blog-list dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">{{ section_title }}</h2>
+                <p>{{ section_desc }}<br></p>
+            </div>
+            <div class="block-content">
+                {% for post in posts %}
+
+                    <!-- card -->
+                    <div class="clean-blog-post">
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <a href="{{ post.link }}">
+                                    <img class="rounded img-fluid" src="{{ post.img }}">
+                                </a>
+                            </div>
+                            <div class="col-lg-7 d-xl-flex flex-column justify-post-xl-start align-items-xl-start">
+                                <div class="info">
+                                    <a href="{{ post.link }}">
+                                        <h3>
+                                        {{ post.title }}
+                                        {% if post.external %}
+                                            <span class="small"><strong> su {{ post.external_name }}</strong></span>
+                                        {% endif %}
+                                        </h3>
+                                    </a>
+                                    <span class="text-muted">{{ post.timestamp }} by&nbsp;{{ post.author }}<br></span>
+                                    {% for tag, tag_type in post.tags %}
+                                        <span class="badge badge-{{ tag_type }} mb-2">{{ tag }}</span>
+                                    {% endfor %}
+                                    <p>{{ post.descr }}</p>
+                                    <div class="d-xl-flex align-items-xl-center mt-2">
+                                        {% if post.external %}
+                                            <a class="btn btn-outline-dark active btn-sm" role="button" href="{{ post.link }}" target="_blank">
+                                                Leggi&nbsp;
+                                            </a>
+                                            <span class="small px-2"><em>link esterno</em></span>
+                                        {% else %}
+                                            <a class="btn btn-outline-dark active btn-sm mt-2" role="button" href="{{ post.link }}">
+                                            Approfondisci
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /card -->
+
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

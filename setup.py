@@ -39,4 +39,8 @@ setup(
     extras_require={"dev": dev_reqs},
     dependency_links=[],
     author_email="giacomo.barone@buildnn.com",
+    entry_points="""
+        [console_scripts]
+        covid19-render=covid_19_ita.render:main
+    """
 )

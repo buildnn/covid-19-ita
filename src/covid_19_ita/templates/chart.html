@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block twitter_title %}{{ title }} | COVID-19 Ita{% endblock %}
+
+{% block content %}
+<div class="article-clean">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2">
+                <div class="intro">
+                    <h1 class="text-center">{{ title_ln_1 }}<br>{{ title_ln_2 }}</h1><p class="text-center">
+                    <span class="by">by</span>{% for authorname, authorlink in authors.items() %}<a href="{{ authorlink }}">{{ authorname }}</a>{% endfor %}
+                    <span class="text-nowrap date">{{ timestamp }}</span><span class="text-lowercase reading-info">Difficoltà di lettura:&nbsp;<span class="text-nowrap">
+                    {% for star in range(0, full_stars|int)%}<i class="fa fa-star"></i>{% endfor %}{% for star in range(0, half_stars|int)%}<i class="fa fa-star-half-full"></i>{% endfor %}{% for star in range(0, empt_stars|int)%}<i class="fa fa-star-o"></i>{% endfor %}
+                    </span>&nbsp;&nbsp;&nbsp;</span>
+                        <a href="#guide">GUIDA ALLA LETTURA</a>
+                    </p>
+                    <p class="text-center small">Fonte Dati: {% for src_name, src_url in data_sources.items() %} {{src_name}} (<a href="{{ src_url }}" target="_blank">Link</a>&nbsp;) {% endfor %}</p>
+                </div>
+                <div class="text"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col d-xl-flex flex-column justify-content-xl-center align-items-xl-center py-2" style="min-height: 600px;">
+        <div class="embed-responsive embed-responsive-1by1 align-self-center" style="{{ frame_style }}">
+            <iframe class="embed-responsive-item" src="{{ figure }}" allowfullscreen=""></iframe>
+        </div>
+    </div>
+</div>
+<div class="article-clean mb-5">
+    <div class="container">
+        <div class="row mb-5 pb-5">
+            <div class="col-lg-10 col-xl-8 offset-lg-1 offset-xl-2" id="guide">
+                <div class="intro"></div>
+                <div class="text">
+                    {{ mark_text | safe}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
