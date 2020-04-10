@@ -1,11 +1,16 @@
-from os.path import join, dirname, abspath
 import json
-import yaml
-from markdown import markdown
-from jinja2 import Environment, FileSystemLoader, select_autoescape, meta
+from os.path import abspath, dirname, join
+from pprint import pformat
+from datetime import datetime
+import logging
+
 import click
+import yaml
+from jinja2 import Environment, FileSystemLoader, meta, select_autoescape
+from markdown import markdown
 
 default_template_dir = join(dirname(abspath(__file__)), "templates")
+logger = logging.getLogger("covid_19_ita")
 
 
 def list_template_variables(template_name, env):
@@ -15,13 +20,13 @@ def list_template_variables(template_name, env):
 
 
 def render_from_configfile(configfile, output, template_dir):
-
-    print("{} -> {}".format(configfile, output))
+    start = datetime.now()
+    logger.info(">>> {} -> {}".format(configfile, output))
 
     if not template_dir:
         template_dir = default_template_dir
 
-    print(f"loading templates from: {template_dir}")
+    logger.info(f">>> loading templates from: {template_dir}")
     env = Environment(
         loader=FileSystemLoader(template_dir),
         autoescape=select_autoescape(
@@ -51,14 +56,22 @@ def render_from_configfile(configfile, output, template_dir):
                 desc = markdown(desc_file_in.read())
             else:
                 raise NotImplementedError("desc file can only be `.md`.")
-        print("description:", desc[:500])
+        logger.info(
+            ">>> loaded description from `{}`. Loaded {} words {} char.".format(
+                desc_file, len(desc.split()), len(desc)
+            )
+        )
     else:
+        logger.info(">>> no desc found in template.")
         desc = ""
 
     template = config_vars.pop("template")
     template_variables = list_template_variables(template, env)
 
-    print(template_variables)
+    logger.info(
+        ">>> template variables:\n        - "
+        + "\n    - ".join(template_variables).replace("\n", "\n    ")
+    )
 
     variables = config_vars["variables"]
     variables["mark_text"] = desc
@@ -66,6 +79,10 @@ def render_from_configfile(configfile, output, template_dir):
     with open(output, "w",) as outfile:
         rendered = env.get_template(template).render(**variables)
         outfile.write(rendered)
+
+    logger.info(
+        ">>> output {} created in {}.".format(output, datetime.now() - start)
+    )
 
 
 # --- CLI ---
@@ -75,11 +92,11 @@ def render_from_configfile(configfile, output, template_dir):
 @click.argument("configfile", type=click.Path(exists=True))
 @click.argument("output", type=click.Path())
 @click.option("--template-dir", type=click.Path(exists=True), default=None)
-def from_config(configfile, output, template_dir):
+@click.option("--log", type=click.STRING, default="INFO", help="one of DEBUG, INFO, WARNING, ERROR, FATAL")
+def from_config(configfile, output, template_dir, log):
+    logging.basicConfig(level=getattr(logging, log, "INFO"))
     render_from_configfile(
-        configfile=configfile,
-        output=output,
-        template_dir=template_dir,
+        configfile=configfile, output=output, template_dir=template_dir,
     )
 
 

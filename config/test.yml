@@ -1,5 +1,7 @@
 template: chart.html
 desc_file: config/test.md
+tags:
+    - test
 variables:
     title: Test | Covid-19
     title_ln_1: Contagi per Provincia
