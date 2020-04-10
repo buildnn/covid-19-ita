@@ -8,7 +8,7 @@ from covid_health.fn.epidemic import calculate_epidemic_age
 from covid_health.ita import prep_pcm_dpc
 from covid_health.utils import map_names
 
-from covid_19_ita import HTML_DIR
+from covid_19_ita import SITE_DIR
 
 
 HUE = "province"
@@ -21,7 +21,7 @@ PREQUERY = (
 QUERY = "epidemic_age >= 0"
 TITLE_SLUG = "Crescita dei casi:"
 
-EXPORT_DIR = os.path.join(HTML_DIR, "figures")
+EXPORT_DIR = os.path.join(SITE_DIR, "figures")
 
 
 def build_simulation_trace(

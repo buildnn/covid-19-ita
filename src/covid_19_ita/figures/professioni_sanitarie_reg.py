@@ -10,9 +10,9 @@ Original file is located at
 import os
 import pandas as pd
 import plotly.express as px
-from covid_19_ita import HTML_DIR
+from covid_19_ita import SITE_DIR
 
-EXPORT_DIR = os.path.join(HTML_DIR, "figures", "tortuga", "III")
+EXPORT_DIR = os.path.join(SITE_DIR, "figures", "tortuga", "III")
 
 
 def add_buildnn_watermark(fig):

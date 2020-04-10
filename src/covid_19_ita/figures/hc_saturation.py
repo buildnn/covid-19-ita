@@ -5,11 +5,11 @@ from covid_health.prep_eurostat import parse_eurostat_dataset
 from covid_health.ita import prep_pcm_dpc, prep_salutegov
 from covid_health.utils import map_names
 
-from covid_19_ita import HTML_DIR
+from covid_19_ita import SITE_DIR
 import plotly.express as px
 
 
-EXPORT_DIR = os.path.join(HTML_DIR, "figures")
+EXPORT_DIR = os.path.join(SITE_DIR, "figures")
 
 
 if __name__ == "__main__":
