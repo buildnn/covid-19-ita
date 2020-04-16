@@ -144,12 +144,14 @@ def fig_a002():
         pop.reindex(pharma["region_code"].values)["region"].str.title().values
     )
     pharma.loc[pharma.region_code == "04", "region"] = "Trentino-Alto Adige/Südtirol"
-    pharma["thhab_per_pharma"] = (pharma["population"] / pharma["n_pharmacies"]) / 1000
+    pharma["hab_per_pharma"] = (
+        (pharma["population"] / pharma["n_pharmacies"]).round(0).astype(int)
+    )
 
     fig_a002 = px.choropleth(
         pharma,
         geojson=GDF_REG,
-        color="thhab_per_pharma",
+        color="hab_per_pharma",
         hover_data=["region", "n_pharmacies", "population"],
         locations="region_code",
         # range_color=(0, 3.5),
@@ -161,7 +163,7 @@ def fig_a002():
         labels={
             "region_code": "Cod. Regione",
             "region": "Regione",
-            "thhab_per_pharma": "Ab./1000 per Farmacia",
+            "hab_per_pharma": "Ab. per Farmacia",
             "n_pharmacies": "Numero Farmacie",
             "population": "Numero Abitanti",
         },
@@ -174,7 +176,7 @@ def fig_a002():
     fig_a002.update_layout(
         margin=dict(l=80, r=140, b=80, t=100, autoexpand=False),
         title=dict(
-            text="<br><b>Abitanti (migliaia) Per Farmacia</b></br>"
+            text="<br><b>Abitanti per Farmacia</b></br>"
             '<span style="font-size: 11px;">Anno 2018 - Meno è Meglio</span>',
             x=0.5,
             y=0.96,
@@ -205,6 +207,5 @@ if __name__ == "__main__":
     fig_a001().write_html(
         join(TARGET_DIR, "fig_a001.html"), config={"displaylogo": False}
     )
-    fig_a002().write_html(
-        join(TARGET_DIR, "fig_a002.html"), include_plotlyjs="cdn"
-    )
+    fig_a002().write_html(join(TARGET_DIR, "fig_a002.html"), include_plotlyjs="cdn")
+
