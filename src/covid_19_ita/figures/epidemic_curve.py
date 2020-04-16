@@ -14,19 +14,14 @@ from covid_19_ita import SITE_DIR
 HUE = "province"
 X = "epidemic_age"
 Y = "tot_n_cases"
-PREQUERY = (
-    "province != 'In fase di definizione/aggiornamento' "
-    f"& {Y} > 0 & {X} >= 0"
-)
+PREQUERY = "province != 'In fase di definizione/aggiornamento' " f"& {Y} > 0 & {X} >= 0"
 QUERY = "epidemic_age >= 0"
 TITLE_SLUG = "Crescita dei casi:"
 
 EXPORT_DIR = os.path.join(SITE_DIR, "figures")
 
 
-def build_simulation_trace(
-    simulation, x_values, name, color, real_data, Y, **kwargs
-):
+def build_simulation_trace(simulation, x_values, name, color, real_data, Y, **kwargs):
     mask = simulation < real_data[Y].max()
     trace = go.Scatter(
         dict(
@@ -44,13 +39,7 @@ def build_simulation_trace(
 
 
 def make_fig_010001(
-    covid_data_db,
-    X,
-    Y,
-    hue=HUE,
-    subhue="region",
-    query=QUERY,
-    prequery=PREQUERY,
+    covid_data_db, X, Y, hue=HUE, subhue="region", query=QUERY, prequery=PREQUERY,
 ):
 
     covid_data = prep_pcm_dpc.parse_covid_data(covid_data_db)
@@ -68,15 +57,9 @@ def make_fig_010001(
         x_values = np.sort(covid_data[X].unique())
         minx = covid_data[X].min()
 
-    doub_2w = np.array(
-        [int(100 * (2 ** (1 / 14)) ** i) for i in range(len(x_values))]
-    )
-    doub_w = np.array(
-        [int(100 * (2 ** (1 / 7)) ** i) for i in range(len(x_values))]
-    )
-    doub_3d = np.array(
-        [int(100 * (2 ** (1 / 3)) ** i) for i in range(len(x_values))]
-    )
+    doub_2w = np.array([int(100 * (2 ** (1 / 14)) ** i) for i in range(len(x_values))])
+    doub_w = np.array([int(100 * (2 ** (1 / 7)) ** i) for i in range(len(x_values))])
+    doub_3d = np.array([int(100 * (2 ** (1 / 3)) ** i) for i in range(len(x_values))])
     if X == "epidemic_age":
         addargs = dict(
             range_x=(0, int(covid_data[X].max()) + 1),
@@ -107,9 +90,7 @@ def make_fig_010001(
     if X == "epidemic_age":
         fig.add_traces(
             [
-                build_simulation_trace(
-                    simulation, x_values, name, color, covid_data, Y
-                )
+                build_simulation_trace(simulation, x_values, name, color, covid_data, Y)
                 for simulation, name, color in zip(
                     [doub_3d, doub_w, doub_2w],
                     ["2x ogni 3gg", "2x ogni settimana", "2x ogni 2settimane"],
@@ -205,9 +186,7 @@ def make_fig_010001(
     #         ),
     #     ],
     # )
-    traces_region = [
-        trace["name"].split(", ")[0] for trace in fig.select_traces()
-    ]
+    traces_region = [trace["name"].split(", ")[0] for trace in fig.select_traces()]
     if X == "epidemic_age":
         simulations = traces_region[-3:]
         traces_region = pd.Series(traces_region[:-3])
@@ -239,22 +218,13 @@ def make_fig_010001(
                     label="Tutte le Regioni",
                     method="update",
                     args=[
-                        {
-                            "visible": [True]
-                            * (len(traces_region) + len(simulations))
-                        },
+                        {"visible": [True] * (len(traces_region) + len(simulations))},
                         {
                             "yaxis": {
-                                "range": (
-                                    covid_data[Y].min(),
-                                    covid_data[Y].max(),
-                                ),
+                                "range": (covid_data[Y].min(), covid_data[Y].max(),),
                             },
                             "xaxis": {
-                                "range": (
-                                    covid_data[X].min(),
-                                    covid_data[X].max(),
-                                )
+                                "range": (covid_data[X].min(), covid_data[X].max(),)
                             },
                         },
                         {"title": f"{TITLE_SLUG} Tutte le Regioni".ljust(36)},
@@ -290,11 +260,7 @@ def make_fig_010001(
                                 )
                             },
                         },
-                        {
-                            "title": "{} {}".format(TITLE_SLUG, region).ljust(
-                                36
-                            )
-                        },
+                        {"title": "{} {}".format(TITLE_SLUG, region).ljust(36)},
                     ],
                 )
                 for region in traces_region.unique()
@@ -375,13 +341,7 @@ def make_fig_010001(
 
 if __name__ == "__main__":
     fig = make_fig_010001(
-        "dpc-province",
-        X,
-        Y,
-        hue=HUE,
-        subhue="region",
-        query=QUERY,
-        prequery=PREQUERY,
+        "dpc-province", X, Y, hue=HUE, subhue="region", query=QUERY, prequery=PREQUERY,
     )
 
     fig.write_html(
@@ -405,9 +365,7 @@ if __name__ == "__main__":
         hue=HUE,
         subhue="region",
         query="province != ''",
-        prequery=(
-            "province != 'In fase di definizione/aggiornamento' " f"& {Y} > 0"
-        ),
+        prequery=("province != 'In fase di definizione/aggiornamento' " f"& {Y} > 0"),
     )
 
     fig.write_html(
