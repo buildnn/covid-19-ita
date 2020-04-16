@@ -91,8 +91,8 @@ def fig_a001():
         )
     )
     fig_a001.update_layout(
-        margin=dict(l=50, r=20, t=80, b=140, autoexpand=False),
-        legend=dict(orientation="h", y=-0.5, title=None),
+        margin=dict(l=50, r=20, t=80, b=150, autoexpand=False),
+        legend=dict(orientation="h", y=-0.58, title=None),
         xaxis=dict(title=None),
         title=dict(x=0.5, y=0.96),
         annotations=[
@@ -102,7 +102,7 @@ def fig_a001():
                 showarrow=False,
                 xref="paper",
                 yref="paper",
-                y=-0.72,
+                y=-0.84,
             )
         ],
     )
