@@ -18,7 +18,10 @@ import warnings
 # TARGET_DIR = "tmp"
 TARGET_DIR = join(SITE_DIR, "figures", "tortuga", "II")
 
-GDF_REG = "https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson"
+GDF_REG = (
+    "https://raw.githubusercontent.com/openpolis/geojson-italy/"
+    "master/geojson/limits_IT_regions.geojson"
+)
 
 
 def get_es_maps():
@@ -40,7 +43,9 @@ def fig_a001():
     es_facility_value_map = dict(prep_eurostat.var["eurostat"]["facility"])
 
     hlth_rs_bdsrg = prep_eurostat.parse_eurostat_dataset("hlth_rs_bdsrg")
-    hlth_rs_bdsrg = hlth_rs_bdsrg.query("unit == 'P_HTHAB'").drop(columns=["unit"])
+    hlth_rs_bdsrg = hlth_rs_bdsrg.query("unit == 'P_HTHAB'").drop(
+        columns=["unit"]
+    )
 
     # curative_beds = hlth_rs_bdsrg.query("facility == 'HBEDT_CUR'").drop(
     #     columns=["facility"]
@@ -52,17 +57,18 @@ def fig_a001():
 
     with warnings.catch_warnings(record=True):
         hsp_beds["time"] = hsp_beds["time"].dt.year
-        hsp_beds["facility"] = hsp_beds["facility"].replace(es_facility_value_map)
+        hsp_beds["facility"] = hsp_beds["facility"].replace(
+            es_facility_value_map
+        )
         hsp_beds["Regione"] = hsp_beds["geo"].replace(es_geo_value_map)
 
     # --- CHARTS ---
     subset = hsp_beds.query("time == 2001 | time == 2017")
     subset = subset[subset.facility.str.startswith("Avail")]
     subset["time"] = subset["time"].astype(str)
-    
+
     subset["level"] = subset["geo"].apply(len)
     subset = subset.sort_values(by=["time", "level"])
-    
 
     fig_a001 = px.bar(
         subset,
@@ -98,7 +104,7 @@ def fig_a001():
         )
     )
     fig_a001.update_layout(
-        margin=dict(l=50, r=20, t=80, b=150, autoexpand=False),
+        margin={"l": 50, "r": 20, "t": 80, "b": 150, "autoexpand": False},
         legend=dict(orientation="h", y=-0.58, title=None),
         xaxis=dict(title=None),
         title=dict(x=0.5, y=0.96),
@@ -141,7 +147,8 @@ def fig_a002():
         .astype(float)
     )
     pop = asl.groupby(["region_code"]).agg(
-        population=pd.NamedAgg("TOTALE", "sum"), region=pd.NamedAgg("region", "first"),
+        population=pd.NamedAgg("TOTALE", "sum"),
+        region=pd.NamedAgg("region", "first"),
     )
 
     pharma["population"] = pop.reindex(pharma["region_code"].values)[
@@ -150,7 +157,9 @@ def fig_a002():
     pharma["region"] = (
         pop.reindex(pharma["region_code"].values)["region"].str.title().values
     )
-    pharma.loc[pharma.region_code == "04", "region"] = "Trentino-Alto Adige/Südtirol"
+    pharma.loc[
+        pharma.region_code == "04", "region"
+    ] = "Trentino-Alto Adige/Südtirol"
     pharma["hab_per_pharma"] = (
         (pharma["population"] / pharma["n_pharmacies"]).round(0).astype(int)
     )
@@ -181,7 +190,7 @@ def fig_a002():
     )
 
     fig_a002.update_layout(
-        margin=dict(l=80, r=140, b=80, t=100, autoexpand=False),
+        margin={"l": 80, "r": 140, "b": 80, "t": 100, "autoexpand": False},
         title=dict(
             text="<br><b>Abitanti per Farmacia</b></br>"
             '<span style="font-size: 11px;">Anno 2018 - Meno è Meglio</span>',
@@ -194,7 +203,8 @@ def fig_a002():
         # showlegend=False,
         annotations=[
             dict(
-                text="Fonte: Rielaborazione BuildNN & Tortuga da Ministero della Salute",
+                text="Fonte: Rielaborazione BuildNN & Tortuga da Ministero "
+                "della Salute",
                 font=dict(size=9, color="grey"),
                 showarrow=False,
                 xref="paper",
@@ -215,7 +225,9 @@ def fig_a003():
     es_isco08_value_map = dict(prep_eurostat.var["eurostat"]["isco08"])
 
     hlth_rs_prsrg = prep_eurostat.parse_eurostat_dataset("hlth_rs_prsrg")
-    hlth_rs_prsrg = hlth_rs_prsrg.query("unit == 'P_HTHAB'").drop(columns=["unit"])
+    hlth_rs_prsrg = hlth_rs_prsrg.query("unit == 'P_HTHAB'").drop(
+        columns=["unit"]
+    )
 
     # curative_beds = hlth_rs_prsrg.query("facility == 'HBEDT_CUR'").drop(
     #     columns=["facility"]
@@ -280,7 +292,7 @@ def fig_a003():
         )
     )
     fig_a003.update_layout(
-        margin=dict(l=50, r=20, t=80, b=150, autoexpand=False),
+        margin={"l": 50, "r": 20, "t": 80, "b": 150, "autoexpand": False},
         legend=dict(orientation="h", y=-0.58, title=None),
         xaxis=dict(title=None),
         title=dict(x=0.5, y=0.96),
@@ -306,7 +318,9 @@ def fig_a004():
     es_isco08_value_map = dict(prep_eurostat.var["eurostat"]["isco08"])
 
     hlth_rs_prsrg = prep_eurostat.parse_eurostat_dataset("hlth_rs_prsrg")
-    hlth_rs_prsrg = hlth_rs_prsrg.query("unit == 'P_HTHAB'").drop(columns=["unit"])
+    hlth_rs_prsrg = hlth_rs_prsrg.query("unit == 'P_HTHAB'").drop(
+        columns=["unit"]
+    )
 
     # curative_beds = hlth_rs_prsrg.query("facility == 'HBEDT_CUR'").drop(
     #     columns=["facility"]
@@ -334,7 +348,7 @@ def fig_a004():
     subset["time"] = subset["time"].astype(str)
 
     subset["level"] = subset["geo"].apply(len)
-    subset = subset.sort_values(by=["time", "level"])    
+    subset = subset.sort_values(by=["time", "level"])
 
     fig_a004 = px.bar(
         subset,
@@ -371,7 +385,7 @@ def fig_a004():
         )
     )
     fig_a004.update_layout(
-        margin=dict(l=50, r=20, t=80, b=150, autoexpand=False),
+        margin={"l": 50, "r": 20, "t": 80, "b": 150, "autoexpand": False},
         legend=dict(orientation="h", y=-0.58, title=None),
         xaxis=dict(title=None),
         title=dict(x=0.5, y=0.96),
@@ -406,7 +420,7 @@ def fig_a005():
     medici_df = medici_df[medici_df.Regione != ""]
     medici_df.loc[
         medici_df.Adempiente.isna() | (medici_df.Adempiente == ""),
-        "Adempiente"
+        "Adempiente",
     ] = "Non Sottoposta a Verifica"
 
     fig_a005 = px.bar(
@@ -434,31 +448,32 @@ def fig_a005():
         # Line Vertical
         dict(
             type="line",
-            x0=-1.,
+            x0=-1.0,
             y0=160,
-            x1=21.,
+            x1=21.0,
             y1=160,
             line=dict(
                 color="#D45113",
                 width=1,
                 # dash="dot",
             ),
-            opacity=1.,
+            opacity=1.0,
         )
     )
     fig_a005.update_layout(
-        margin=dict(l=50, r=20, t=80, b=170, autoexpand=False),
+        margin={"l": 50, "r": 20, "t": 80, "b": 170, "autoexpand": False},
         legend=dict(orientation="h", y=-0.78, title=None),
         xaxis=dict(title=None),
         title=dict(x=0.5, y=0.96),
     )
     fig_a005.add_annotation(
-        text="Fonte: Rielaborazione BuildNN & Tortuga da Eurostat",
+        text="Fonte: Rielaborazione BuildNN & Tortuga da Ministero della "
+        "Salute",
         font=dict(size=9, color="grey"),
         showarrow=False,
         xref="paper",
         yref="paper",
-       y=-1.04,
+        y=-1.04,
     )
     fig_a005.add_annotation(
         x=-0.5,
@@ -469,11 +484,7 @@ def fig_a005():
         yanchor="middle",
         text="<b>Livello Minimo</b>",
         showarrow=False,
-        font=dict(
-            family="Courier New, monospace",
-            size=10,
-            color="#ffffff"
-            ),
+        font=dict(family="Courier New, monospace", size=10, color="#ffffff"),
         align="left",
         bordercolor="#c7c7c7",
         borderwidth=0,
@@ -484,6 +495,63 @@ def fig_a005():
 
     watermark(fig_a005)
     return fig_a005
+
+
+def fig_a006():
+    df = pd.read_csv(
+        "https://raw.githubusercontent.com/buildnn/covid-19-ita/master/"
+        "data/migrazione_sanitaria_gimbe_2019-06.csv"
+    )
+    df["Saldo"] = ((df["Crediti"] - df["Debiti"]) / 1000000).round(1)
+    df = df.sort_values("Saldo").dropna(subset=["Saldo"])
+
+    fig_a006 = px.bar(
+        df,
+        y="Regione",
+        x="Saldo",
+        orientation="h",
+        color="Saldo",
+        color_continuous_midpoint=0,
+        color_continuous_scale="Temps_r",
+        width=500,
+        height=700,
+        range_x=(-450, 810),
+        template="plotly_white",
+        labels={"Saldo": "Saldo (mln€)"},
+        title="<br><b>Saldo per Prestazioni verso Non Residenti</b></br>"
+        '<span style="font-size: 12px;">Anno 2017 - Milioni di Euro</span>',
+    )
+    fig_a006.layout.coloraxis.showscale = False
+    fig_a006.update_layout(
+        margin={"l": 120, "r": 30, "t": 80, "b": 100, "autoexpand": False},
+        legend=dict(orientation="h", y=-0.78, title=None),
+        yaxis=dict(title=None),
+        xaxis=dict(tickformat="+0", tick0=-400, dtick=200),
+        title=dict(x=0.5, y=0.98),
+    )
+    fig_a006.add_annotation(
+        text="<br>Fonte: Osservatorio GIMBE, ACISMOM e OPBG indicano "
+        "rispettivamente Ospedale Pediatrico Bambino Gesù <br>e Associazione "
+        "dei Cavalieri Italiani del Sovrano Militare Ordine di Malta, "
+        "contabilizzati separatamente",
+        align="center",
+        font=dict(size=9, color="grey"),
+        showarrow=False,
+        xref="paper",
+        yref="paper",
+        x=-0.28,
+        y=-0.15,
+    )
+
+    watermark(fig_a006)
+
+    fig_a006.write_html(
+        join(TARGET_DIR, "fig_a006.html"),
+        config={"displaylogo": False},
+        include_plotlyjs="cdn",
+    )
+
+    return fig_a006
 
 
 if __name__ == "__main__":

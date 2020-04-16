@@ -38,7 +38,9 @@ def get_covid_datasets():
     # | 3 | 2020-04-05 |           35 |          1 | Afghanistan | AF     | AFG          | 3.71724e+07 |
     # | 4 | 2020-04-04 |            0 |          0 | Afghanistan | AF     | AFG          | 3.71724e+07 |
 
-    epidemic_start = covid.loc[covid.active_cases >= 100].groupby("geo").time.min()
+    epidemic_start = (
+        covid.loc[covid.active_cases >= 100].groupby("geo").time.min()
+    )
     epidemic_start.index = epidemic_start.index.str.replace("_", " ")
     # geo
     # Algeria                2020-03-29
@@ -111,7 +113,9 @@ def get_bilancio_datasets():
     return bilancio, bilancio_prep
 
 
-def plot(df, x, y, pl_kwargs, labels, title, update_layout_kwargs, line_shape=None):
+def plot(
+    df, x, y, pl_kwargs, labels, title, update_layout_kwargs, line_shape=None
+):
     fig = px.line(
         df,
         x=x,
@@ -162,7 +166,8 @@ def plot(df, x, y, pl_kwargs, labels, title, update_layout_kwargs, line_shape=No
         showlegend=False,
         legend=dict(orientation="v", x=0.0, y=1.0, title=None),
         xaxis=dict(
-            rangeslider=dict(visible=True), type="date" if x == "time" else "linear",
+            rangeslider=dict(visible=True),
+            type="date" if x == "time" else "linear",
         ),
     )
     update_kwa.update(update_layout_kwargs)
