@@ -4,5 +4,6 @@ black
 
 ipython
 jupyter
+jupyterlab
 ipykernel
 nbformat
