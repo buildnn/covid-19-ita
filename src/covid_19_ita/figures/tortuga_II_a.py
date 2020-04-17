@@ -435,7 +435,7 @@ def fig_a005():
             "Adempiente": "#54A24B",
         },
         # range_y=(0, 1060),
-        width=500,
+        width=650,
         height=400,
         # barmode="group",
         template="plotly_white",
