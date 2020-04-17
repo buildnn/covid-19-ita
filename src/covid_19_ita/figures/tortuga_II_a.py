@@ -174,7 +174,7 @@ def fig_a002():
         center={"lat": 42.65, "lon": 12.4},
         featureidkey="properties.reg_istat_code",
         projection="mercator",
-        template="plotly_dark",
+        template="plotly_white",
         color_continuous_scale=px.colors.diverging.Temps,
         labels={
             "region_code": "Cod. Regione",
