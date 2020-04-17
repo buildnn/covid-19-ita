@@ -1,4 +1,4 @@
-def watermark(fig):
+def watermark(fig, logo_y=None, annot_y=None, logo_h=None):
     margin = fig.layout["margin"]
     b = margin["b"]
     t = margin["t"]
@@ -14,12 +14,12 @@ def watermark(fig):
     h = fig["layout"]["height"]
 
     font_size = 7
-    logo_h = 30
+    logo_h = 30 if not logo_h else logo_h
     logo_size_x = logo_h / (w - l)
     annot_x = 1.0 + 4 / w
 
-    logo_y = 1 + 36 / (h - t - b)
-    annot_y = 1 + 22 / (h - t - b)
+    logo_y = 1 + 36 / (h - t - b) if not logo_y else logo_y
+    annot_y = 1 + 22 / (h - t - b) if not annot_y else annot_y
 
     logo = dict(
         source="https://media-exp1.licdn.com/dms/image/C4D0BAQFsEw0kedrArQ/"

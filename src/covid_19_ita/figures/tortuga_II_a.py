@@ -119,7 +119,7 @@ def fig_a001():
             )
         ],
     )
-    watermark(fig_a001)
+    watermark(fig_a001, logo_y=-.75, annot_y=-.82)
 
     return fig_a001
 
@@ -307,7 +307,7 @@ def fig_a003():
             )
         ],
     )
-    watermark(fig_a003)
+    watermark(fig_a003, logo_y=-.75, annot_y=-.82)
 
     return fig_a003
 
@@ -400,7 +400,7 @@ def fig_a004():
             )
         ],
     )
-    watermark(fig_a004)
+    watermark(fig_a004, logo_y=-.75, annot_y=-.82)
 
     return fig_a004
 
@@ -545,12 +545,6 @@ def fig_a006():
 
     watermark(fig_a006)
 
-    fig_a006.write_html(
-        join(TARGET_DIR, "fig_a006.html"),
-        config={"displaylogo": False},
-        include_plotlyjs="cdn",
-    )
-
     return fig_a006
 
 
@@ -561,23 +555,33 @@ if __name__ == "__main__":
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
+
     fig_a002().write_html(
         join(TARGET_DIR, "fig_a002.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
+
     fig_a003().write_html(
         join(TARGET_DIR, "fig_a003.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
+
     fig_a004().write_html(
         join(TARGET_DIR, "fig_a004.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
+
     fig_a005().write_html(
         join(TARGET_DIR, "fig_a005.html"),
+        config={"displaylogo": False},
+        include_plotlyjs="cdn",
+    )
+
+    fig_a006().write_html(
+        join(TARGET_DIR, "fig_a006.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
