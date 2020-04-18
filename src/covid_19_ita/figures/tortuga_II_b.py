@@ -159,6 +159,93 @@ def fig_b003():
     return fig
 
 
+def fig_b004():
+    df = pd.read_csv(
+        "https://docs.google.com/spreadsheets/d/"
+        "1VwmTC47fQdnuVFizvI7eTs3xPPFtJwU4/export?format=csv&"
+        "id=1VwmTC47fQdnuVFizvI7eTs3xPPFtJwU4&gid=831947660"
+    )
+
+    fig = go.Figure()
+
+    fig.add_traces(
+        [
+            go.Scatter(
+                x=df["Anno"],
+                y=df["Fondo Sanitario Nazionale (2008 =100)"].round(1),
+                name="Fondo Sanitario Nazionale (2008=100)",
+                mode="lines+markers",
+                line=dict(width=1.),
+                # marker=dict(symbol=134)
+            ),
+            go.Scatter(
+                x=df["Anno"],
+                y=df["Indice prezzi sanità 2008=100"].round(1),
+                name="Indice Prezzi Sanità (2008=100)",
+                mode="lines+markers",
+                line=dict(width=1.),
+                # marker=dict(symbol=134)
+            ),
+            go.Scatter(
+                x=df["Anno"],
+                y=df["migrazione sanitaria 2008=100"].round(1),
+                name="Migrazione Sanitaria (2008=100)",
+                mode="lines+markers",
+                line=dict(width=1.),
+                # marker=dict(symbol=134)
+            ),
+        ]
+    )
+    w = 500
+    h = 400
+    lm = 40
+    rm = 40
+    bm = 120
+    tm = 80
+    fig.update_layout(
+        title=dict(
+            text="<b>Fondi per la Sanità, Prezzi e Migrazione Sanitaria</b>"
+            '<br><span style="font-size: 12;">Andamento negli anni '
+            '(standardizzato, 2008=1)</span>',
+            x=.5,
+        ),
+        template="plotly_white",
+        legend=dict(
+            orientation="h",
+            x=.5,
+            y=-70/(h+bm+tm),
+            yanchor="top",
+            xanchor="center",
+        ),
+        width=w,
+        height=h,
+        margin={
+            "l": lm,
+            "r": rm,
+            "b": bm,
+            "t": tm,
+            "autoexpand": False,
+        },
+    )
+    fig.add_annotation(
+        text="Fonti: Eurostat, Ministero della Sanità, "
+        "Elaborazioni su dati Ilsole24Ore/Conferenza Stato-Regioni",
+        xref="paper",
+        yref="paper",
+        yanchor="bottom",
+        font=dict(size=9, color="grey"),
+        y=-340/(h+bm+tm),
+        showarrow=False,
+    )
+    
+
+    watermark(fig, annot_y=-270/(h+bm+tm), logo_y=-235/(h+bm+tm))
+
+    return fig
+    
+
+
+
 if __name__ == "__main__":
 
     fig_b001().write_html(
@@ -175,4 +262,11 @@ if __name__ == "__main__":
         join(TARGET_DIR, "fig_b003.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
+    )
+    
+    fig_b004().write_html(
+        join(TARGET_DIR, "fig_b004.html"),
+        config={"displaylogo": False},
+        include_plotlyjs="cdn",
+        
     )
