@@ -71,6 +71,7 @@ def fig_e001():
             height=450,
             yaxis=dict(title=None, tickformat="d"),
             legend=dict(orientation="h", title=None, y=-0.13),
+            dragmode=False,
         )
         .update_xaxes(title=None)
     )
@@ -82,7 +83,7 @@ def fig_e001():
         color_discrete_sequence=["steelblue"],
         facet_col="region",
         opacity=0.5,
-    ).update_traces(hoverinfo="skip")
+    ).update_traces(hoverinfo="skip").update_layout(dragmode=False)
 
     for n, trace in enumerate(f2.select_traces()):
         trace["name"] = "Tamponi Effettuati"
@@ -144,6 +145,7 @@ def fig_e002():
         margin={"b": 120},
         height=450,
         legend={"y": -0.2},
+        dragmode=False,
         xaxis=dict(
             # rangeslider=dict(
             #     visible=True
@@ -198,13 +200,14 @@ def fig_e003():
         height=450,
         legend=dict(orientation="h", y=-.24, x=.5, xanchor="center"),
         yaxis=dict(range=(0, 80)),
+        dragmode=False,
     )
 
     return fig
 
 
 if __name__ == "__main__":
-    """
+
     fig_e001().write_html(
         join(TARGET_DIR, "fig_e001.html"),
         config={"displaylogo": False},
@@ -216,7 +219,7 @@ if __name__ == "__main__":
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
-    """
+
     fig_e003().write_html(
         join(TARGET_DIR, "fig_e003.html"),
         config={"displaylogo": False},
