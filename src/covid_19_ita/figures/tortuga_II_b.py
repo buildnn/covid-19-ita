@@ -74,7 +74,7 @@ def plot_veneto_lombardy(df, y, title):
         },
         range_x=(
             pd.to_datetime("2020-02-25"),
-            df.time.max() + pd.to_timedelta(7, "D"),
+            df.time.max() + pd.to_timedelta(10, "D"),
         ),
         line_shape="spline",
     )
@@ -175,7 +175,7 @@ def fig_b004():
                 y=df["Fondo Sanitario Nazionale (2008 =100)"].round(1),
                 name="Fondo Sanitario Nazionale (2008=100)",
                 mode="lines+markers",
-                line=dict(width=1.),
+                line=dict(width=1.0),
                 # marker=dict(symbol=134)
             ),
             go.Scatter(
@@ -183,7 +183,7 @@ def fig_b004():
                 y=df["Indice prezzi sanità 2008=100"].round(1),
                 name="Indice Prezzi Sanità (2008=100)",
                 mode="lines+markers",
-                line=dict(width=1.),
+                line=dict(width=1.0),
                 # marker=dict(symbol=134)
             ),
             go.Scatter(
@@ -191,7 +191,7 @@ def fig_b004():
                 y=df["migrazione sanitaria 2008=100"].round(1),
                 name="Migrazione Sanitaria (2008=100)",
                 mode="lines+markers",
-                line=dict(width=1.),
+                line=dict(width=1.0),
                 # marker=dict(symbol=134)
             ),
         ]
@@ -206,26 +206,20 @@ def fig_b004():
         title=dict(
             text="<b>Fondi per la Sanità, Prezzi e Migrazione Sanitaria</b>"
             '<br><span style="font-size: 12;">Andamento negli anni '
-            '(standardizzato, 2008=1)</span>',
-            x=.5,
+            "(standardizzato, 2008=1)</span>",
+            x=0.5,
         ),
         template="plotly_white",
         legend=dict(
             orientation="h",
-            x=.5,
-            y=-70/(h+bm+tm),
+            x=0.5,
+            y=-70 / (h + bm + tm),
             yanchor="top",
             xanchor="center",
         ),
         width=w,
         height=h,
-        margin={
-            "l": lm,
-            "r": rm,
-            "b": bm,
-            "t": tm,
-            "autoexpand": False,
-        },
+        margin={"l": lm, "r": rm, "b": bm, "t": tm, "autoexpand": False,},
     )
     fig.add_annotation(
         text="Fonti: Eurostat, Ministero della Sanità, "
@@ -234,16 +228,13 @@ def fig_b004():
         yref="paper",
         yanchor="bottom",
         font=dict(size=9, color="grey"),
-        y=-340/(h+bm+tm),
+        y=-340 / (h + bm + tm),
         showarrow=False,
     )
-    
 
-    watermark(fig, annot_y=-270/(h+bm+tm), logo_y=-235/(h+bm+tm))
+    watermark(fig, annot_y=-270 / (h + bm + tm), logo_y=-235 / (h + bm + tm))
 
     return fig
-    
-
 
 
 if __name__ == "__main__":
@@ -263,10 +254,10 @@ if __name__ == "__main__":
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
-    
+
     fig_b004().write_html(
         join(TARGET_DIR, "fig_b004.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
-        
     )
+
