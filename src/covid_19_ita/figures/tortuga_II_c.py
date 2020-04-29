@@ -21,11 +21,12 @@ labels = {
     "mortality": "Decessi sul Totale Casi",
     "deaths_pthab": "Decessi Ufficiali COVID-19 per 1000 ab.",
     "deaths_phhab": "Decessi Ufficiali COVID-19 per 10.000 ab.",
-    "pos_pthab": "Test Positivi per 10.000 ab.",
+    "pos_pthab": "Casi COVID-19 Attivi per 1000 ab.",
     "n_home_quarantine": "Isolamento Domiciliare",
     "n_intensive_care": "Ricoverati in Terapia Intensiva",
     "n_hospitalized": "Ospedalizzati (escluso T.I.)",
     "region": "Regione",
+    "totale_positivi": "Casi Attivi",
     map_names("epidemic_age"): map_names("epidemic_age") + " (100° caso)",
 }
 
@@ -84,7 +85,7 @@ def get_pop_covid_regions():
         covid_data.n_deceased / (covid_data.population / 10000)
     ).round(2)
     covid_data["pos_pthab"] = (
-        covid_data.totale_positivi / (covid_data.population / 10000)
+        (covid_data.totale_positivi / covid_data.population) * 1000
     ).round(2)
 
     covid_data["time"] = covid_data["time"].dt.floor("D")
@@ -241,6 +242,11 @@ if __name__ == "__main__":
     )
     fig_c002().write_html(
         join(TARGET_DIR, "fig_c002_norm.html"),
+        config={"displaylogo": False},
+        include_plotlyjs="cdn",
+    )
+    fig_c001(y="pos_pthab").write_html(
+        join(TARGET_DIR, "fig_c004.html"),
         config={"displaylogo": False},
         include_plotlyjs="cdn",
     )
