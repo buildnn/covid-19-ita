@@ -136,11 +136,18 @@ def fig_c001(y="test_pthab", regions=["Lombardia", "Veneto"]):
             )
         )
 
+    fig.add_annotation(
+        font=dict(size=9, color="grey"),
+        showarrow=False,
+        yref="paper",
+        xref="paper",
+        text="Fonte: ISTAT, Dipartimento di Protezione Civile Italiana",
+        y=-0.1,
+        yanchor="top",
+    )
+
     fig.update_layout(
-        title=dict(
-            text=f"<b>{labels[y]}: Lombardia e Veneto</b>",
-            x=.5,
-        ),
+        title=dict(text=f"<b>{labels[y]}: Lombardia e Veneto</b>", x=0.5,),
         xaxis=dict(
             range=[
                 data["time"].min(),
@@ -148,8 +155,15 @@ def fig_c001(y="test_pthab", regions=["Lombardia", "Veneto"]):
             ],
             title=None,
         ),
-        margin={"l": 60, "r": 30, "t": 100, "b": 120, "autoexpand": False},
-        legend=dict(orientation="h", title=None, xanchor="center", x=.5),
+        margin={"l": 60, "r": 30, "t": 100, "b": 100, "autoexpand": False},
+        legend=dict(
+            orientation="h",
+            title=None,
+            xanchor="center",
+            x=0.5,
+            y=-0.15,
+            yanchor="top",
+        ),
         dragmode=False,
     )
 
@@ -184,18 +198,27 @@ def fig_c002(regions=["Lombardia", "Veneto"], norm="fraction"):
         template="plotly_white",
     )
     fig.update_xaxes(title=None)
+    fig.add_annotation(
+        font=dict(size=9, color="grey"),
+        showarrow=False,
+        yref="paper",
+        xref="paper",
+        text="Fonte: ISTAT, Dipartimento di Protezione Civile Italiana",
+        y=-0.15,
+        yanchor="top",
+    )
     fig.update_layout(
         title=dict(
             text=f"<br><b>Composizione dei Casi COVID-19 Attivi:"
             " Lombardia e Veneto</b></br>"
             f'<span style="font-size: 12px">{value_name} - Clicca sulle Voci '
-            'nella Legenda per Selezionare o Deselezionare</span>',
-            x=.5,
-            y=.98,
+            "nella Legenda per Selezionare o Deselezionare</span>",
+            x=0.5,
+            y=0.98,
         ),
-        legend=dict(orientation="h", y=-.15, yanchor="top"),
+        legend=dict(orientation="h", y=-0.2, yanchor="top", title=None),
         yaxis=dict(tickformat=yformat),
-        margin={"l": 60, "r": 30, "t": 100, "b": 80, "autoexpand": False},
+        margin={"l": 60, "r": 30, "t": 130, "b": 100, "autoexpand": False},
         dragmode=False,
         width=650,
         height=450,
